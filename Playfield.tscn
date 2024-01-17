@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://daqvac56oklni"]
+
+[ext_resource type="Texture2D" uid="uid://dgp62jlxbo6lu" path="res://field.png" id="1_qei62"]
+
+[node name="Playfield" type="Node2D"]
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_qei62")
