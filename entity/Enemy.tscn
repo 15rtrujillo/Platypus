@@ -1,11 +1,15 @@
 [gd_scene load_steps=2 format=3 uid="uid://dossc0fvpq5ga"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u2sxo"]
+[ext_resource type="Script" path="res://entity/Enemy.cs" id="1_lys4k"]
 
 [node name="Enemy" type="Area2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_u2sxo")
+script = ExtResource("1_lys4k")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]

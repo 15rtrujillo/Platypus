@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnbtff6yl5wki"]
+
+[ext_resource type="PackedScene" uid="uid://dossc0fvpq5ga" path="res://entity/Enemy.tscn" id="1_ab3em"]
+[ext_resource type="Texture2D" uid="uid://bvt0d6vssjxyn" path="res://entity/sedan.png" id="2_ou2bi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ousaf"]
+size = Vector2(81, 44)
+
+[node name="Sedan" instance=ExtResource("1_ab3em")]
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_ou2bi")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_ousaf")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="2"]
+position = Vector2(0, -4.76837e-07)
+scale = Vector2(4, 2.2)

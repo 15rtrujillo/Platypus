@@ -13,3 +13,14 @@ script = ExtResource("1_3rkei")
 
 [node name="SpawnLocation" type="Marker2D" parent="."]
 position = Vector2(525, 1350)
+
+[node name="SedanSpawnLocation" type="Marker2D" parent="."]
+position = Vector2(1075, 1050)
+
+[node name="Semi_TruckSpawnLocation" type="Marker2D" parent="."]
+position = Vector2(-25, 850)
+
+[node name="SedanSpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="SedanSpawnTimer" to="." method="OnSedanSpawnTimerTimeout"]
