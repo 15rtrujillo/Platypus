@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Platypuser"
+config/name="Platypus"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
@@ -19,12 +19,13 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=1050
 window/size/viewport_height=1400
-window/size/mode=2
+window/size/window_width_override=600
+window/size/window_height_override=800
 window/stretch/mode="canvas_items"
 
 [dotnet]
 
-project/assembly_name="Platypuser"
+project/assembly_name="Platypus"
 
 [input]
 
