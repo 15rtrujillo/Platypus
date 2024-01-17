@@ -18,9 +18,14 @@ position = Vector2(525, 1350)
 position = Vector2(1075, 1050)
 
 [node name="Semi_TruckSpawnLocation" type="Marker2D" parent="."]
-position = Vector2(-25, 850)
+position = Vector2(-50, 850)
 
 [node name="SedanSpawnTimer" type="Timer" parent="."]
 autostart = true
 
+[node name="Semi_TruckSpawnTimer" type="Timer" parent="."]
+wait_time = 2.5
+autostart = true
+
 [connection signal="timeout" from="SedanSpawnTimer" to="." method="OnSedanSpawnTimerTimeout"]
+[connection signal="timeout" from="Semi_TruckSpawnTimer" to="." method="OnSemi_TruckSpawnTimerTimeout"]

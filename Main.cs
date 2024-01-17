@@ -16,13 +16,24 @@ public partial class Main : Node
 		_semi_TruckScene = ResourceLoader.Load<PackedScene>("res://entity/Semi_Truck.tscn");
 	}
 	
+	private void InitializeEnemy(Enemy enemy, int speed, Vector2 direction)
+	{
+		enemy.Speed = speed;
+		enemy.Direction = direction;
+		enemy.SpriteColor = new Color((float)GD.RandRange(0.1, 1.0), (float)GD.RandRange(0.1, 1.0), (float)GD.RandRange(0.1, 1.0));
+		enemy.Position = GetNode<Marker2D>($"{enemy.Name}SpawnLocation").Position;
+		AddChild(enemy);
+	}
+	
 	private void OnSedanSpawnTimerTimeout()
 	{
 		Enemy sedan = _sedanScene.Instantiate<Enemy>();
-		sedan.Speed = 250;
-		sedan.Direction = Vector2.Left;
-		sedan.SpriteColor = new Color(GD.Randf(), GD.Randf(), GD.Randf());
-		sedan.Position = GetNode<Marker2D>("SedanSpawnLocation").Position;
-		AddChild(sedan);
+		InitializeEnemy(sedan, 300, Vector2.Left);
+	}
+	
+	private void OnSemi_TruckSpawnTimerTimeout()
+	{
+		Enemy semi_Truck = _semi_TruckScene.Instantiate<Enemy>();
+		InitializeEnemy(semi_Truck, 150, Vector2.Right);
 	}
 }
