@@ -3,8 +3,10 @@ using System;
 
 public partial class Enemy : Area2D
 {
+    [Export]
+    public int Speed { get; set; } = 100;
+    
 	private Color _spriteColor = new Color(Colors.White);
-	[Export]
 	public Color SpriteColor { 
 		get
 		{
@@ -16,9 +18,6 @@ public partial class Enemy : Area2D
 			_spriteColor = value;
 		}
 	}
-	
-	[Export]
-	public int Speed { get; set; } = 100;
 	
 	private Vector2 _direction = Vector2.Left;
 	public Vector2 Direction
