@@ -5,23 +5,8 @@ using System;
 public partial class Level : Resource
 {
 	[Export]
-	public int LevelTime { get; set; }
+	public int TimeLimit { get; set; }
 
-	[ExportGroup("Sedan")]
 	[Export]
-	public int SedanSpeed { get; set; }
-	[Export]
-	public float SedanSpawnInterval { get; set; }
-
-    [ExportGroup("Coupe")]
-    [Export]
-    public int CoupeSpeed { get; set; }
-    [Export]
-    public float CoupeSpawnInterval { get; set; }
-
-    [ExportGroup("Semi-Truck")]
-	[Export]
-	public int SemiTruckSpeed { get; set; }
-	[Export]
-	public float SemiTruckSpawnInterval { get; set; }
+	public Godot.Collections.Array<EnemyData> Enemies { get; set; }
 }
