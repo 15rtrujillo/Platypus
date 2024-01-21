@@ -4,9 +4,9 @@ using System;
 public partial class Main : Node
 {
 	[ExportGroup("Levels")]
-    [Export]
-    public int CurrentLevel { get; set; } = 0;
-    [Export]
+	[Export]
+	public int CurrentLevel { get; set; } = 0;
+	[Export]
 	public Godot.Collections.Array<Level> Levels { get; set; }
 	
 	private Level _currentLevel;
@@ -14,7 +14,7 @@ public partial class Main : Node
 
 	private System.Collections.Generic.Dictionary<Area2D, Area2D.AreaEnteredEventHandler> _nestEventHandlers;
 
-    public override void _Ready()
+	public override void _Ready()
 	{
 		_currentLevel = Levels[CurrentLevel];
 
@@ -29,9 +29,9 @@ public partial class Main : Node
 			if (child is Area2D)
 			{
 				Area2D areaNode = (Area2D)child;
-                void nestEnteredHandler(Area2D hitBy) => OnNestEntered(hitBy, areaNode);
+				void nestEnteredHandler(Area2D hitBy) => OnNestEntered(hitBy, areaNode);
 
-                _nestEventHandlers.Add(areaNode, nestEnteredHandler);
+				_nestEventHandlers.Add(areaNode, nestEnteredHandler);
 
 				areaNode.AreaEntered += nestEnteredHandler;
 			}
@@ -50,12 +50,12 @@ public partial class Main : Node
 			timer.WaitTime = enemyData.SpawnInterval;
 			EnemyData thisEnemyData = enemyData;
 			timer.Connect(Timer.SignalName.Timeout, Callable.From(() => {
-                Enemy enemy = thisEnemyData.Scene.Instantiate<Enemy>();
-                InitializeEnemy(enemy, thisEnemyData.Speed, thisEnemyData.SpawnLocation);
-            }));
+				Enemy enemy = thisEnemyData.Scene.Instantiate<Enemy>();
+				InitializeEnemy(enemy, thisEnemyData.Speed, thisEnemyData.SpawnLocation);
+			}));
 			AddChild(timer);
-            timer.Start();
-        }
+			timer.Start();
+		}
 	}
 	
 	private void InitializeEnemy(Enemy enemy, int speed, int spawnLocation)
