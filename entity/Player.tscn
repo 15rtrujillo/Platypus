@@ -8,7 +8,6 @@ radius = 19.0
 height = 92.0
 
 [node name="Player" type="Area2D"]
-monitorable = false
 script = ExtResource("1_7ub02")
 metadata/_edit_group_ = true
 

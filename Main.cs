@@ -12,12 +12,31 @@ public partial class Main : Node
 	private Level _currentLevel;
 	private Player _player;
 
+	private System.Collections.Generic.Dictionary<Area2D, Area2D.AreaEnteredEventHandler> _nestEventHandlers;
+
     public override void _Ready()
 	{
 		_currentLevel = Levels[CurrentLevel];
 
 		_player = GetNode<Player>("Player");
 		_player.Position = GetNode<Marker2D>("PlayerSpawnLocation").Position;
+
+
+		_nestEventHandlers = new System.Collections.Generic.Dictionary<Area2D, Area2D.AreaEnteredEventHandler>();
+
+		foreach (Node child in GetNode<Node2D>("Playfield").GetChildren())
+		{
+			if (child is Area2D)
+			{
+				Area2D areaNode = (Area2D)child;
+                void nestEnteredHandler(Area2D hitBy) => OnNestEntered(hitBy, areaNode);
+
+                _nestEventHandlers.Add(areaNode, nestEnteredHandler);
+
+				areaNode.AreaEntered += nestEnteredHandler;
+			}
+		}
+
 
 		StartLevel();
 	}
@@ -50,9 +69,24 @@ public partial class Main : Node
 		}
 		enemy.Direction = direction;
 
-		enemy.SpriteColor = new Color((float)GD.RandRange(0.1, 1.0), (float)GD.RandRange(0.1, 1.0), (float)GD.RandRange(0.1, 1.0));
+		enemy.SpriteColor = new Color((float)GD.RandRange(0.2, 1.0), (float)GD.RandRange(0.2, 1.0), (float)GD.RandRange(0.2, 1.0));
 
 		enemy.Position = GetNode<Marker2D>($"SpawnLocation{spawnLocation}").Position;
 		AddChild(enemy);
+	}
+
+	private void OnNestEntered(Area2D area, Area2D whichNest)
+	{
+		// Probably increment some score
+
+		if (area is Player player)
+		{
+			player.Position = GetNode<Marker2D>("PlayerSpawnLocation").Position;
+			Sprite2D sprite = new Sprite2D();
+			sprite.Texture = ResourceLoader.Load<Texture2D>("res://entity/platypus.png");
+			whichNest.AddChild(sprite);
+
+			whichNest.AreaEntered -= _nestEventHandlers[whichNest];
+		}
 	}
 }

@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://daqvac56oklni"]
+[gd_scene load_steps=3 format=3 uid="uid://daqvac56oklni"]
 
 [ext_resource type="Texture2D" uid="uid://dgp62jlxbo6lu" path="res://field.png" id="1_qei62"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gqfs3"]
+size = Vector2(110, 72)
 
 [node name="Playfield" type="Node2D"]
 metadata/_edit_group_ = true
@@ -9,3 +12,43 @@ metadata/_edit_group_ = true
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_qei62")
+
+[node name="Nest0" type="Area2D" parent="."]
+position = Vector2(85, 160)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Nest0"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_gqfs3")
+
+[node name="Nest1" type="Area2D" parent="."]
+position = Vector2(305, 160)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Nest1"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_gqfs3")
+
+[node name="Nest2" type="Area2D" parent="."]
+position = Vector2(525, 160)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Nest2"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_gqfs3")
+
+[node name="Nest3" type="Area2D" parent="."]
+position = Vector2(745, 160)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Nest3"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_gqfs3")
+
+[node name="Nest4" type="Area2D" parent="."]
+position = Vector2(965, 160)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Nest4"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_gqfs3")

@@ -55,7 +55,7 @@ public partial class Player : Area2D
 		if (area is Enemy)
 		{
 			EmitSignal(SignalName.PlayerDied);
-			QueueFree();
+			Hide();
 		}
 	}
 }
