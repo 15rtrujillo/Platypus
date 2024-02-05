@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-namespace PlatypusGame.Entity
+namespace Platypus.Entity
 {
     public partial class Player : Area2D
     {
@@ -17,11 +17,16 @@ namespace PlatypusGame.Entity
         [Export]
         public Vector2 MaxWaterBound { get; set; } = new Vector2(1050, 700);
 
-        [Signal]
-        public delegate void PlayerRanOverEventHandler();
+        public delegate void PlayerDiedEventHandler();
+        public event PlayerDiedEventHandler PlayerDied;
 
         private Vector2 _newPosition;
         private bool _isMoving = false;
+
+        public override void _Ready()
+        {
+            AreaEntered += OnAreaEntered;
+        }
 
         public override void _UnhandledKeyInput(InputEvent @event)
         {
@@ -74,6 +79,12 @@ namespace PlatypusGame.Entity
                 {
                     GD.Print("Hit something!" + ((Node)rayCast.GetCollider()).Name);
                 }
+
+                else
+                {
+                    GD.Print("You drowned!");
+                    // Die();
+                }
                 rayCast.Enabled = false;
             }
 
@@ -97,12 +108,17 @@ namespace PlatypusGame.Entity
 
         }
 
+        private void Die()
+        {
+            PlayerDied?.Invoke();
+            Hide();
+        }
+
         private void OnAreaEntered(Area2D area)
         {
             if (area is Enemy)
             {
-                EmitSignal(SignalName.PlayerRanOver);
-                Hide();
+                Die();
             }
         }
     }

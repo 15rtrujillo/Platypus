@@ -1,7 +1,10 @@
 using Godot;
 using System;
 
-namespace PlatypusGame
+using Platypus.Entity;
+using Platypus.Levels;
+
+namespace Platypus
 {
 	public partial class Main : Node
 	{
@@ -11,18 +14,21 @@ namespace PlatypusGame
 		[Export]
 		public Godot.Collections.Array<Level> Levels { get; set; }
 
-		private Level _currentLevel;
+		private Level _level;
 		private Player _player;
+		private int _score = 0;
+		private int _lives = 5;
 
 		private System.Collections.Generic.Dictionary<Area2D, Area2D.AreaEnteredEventHandler> _nestEventHandlers;
+		private System.Collections.Generic.IList<Timer> _timers = new System.Collections.Generic.List<Timer>();
 
 		public override void _Ready()
 		{
-			_currentLevel = Levels[CurrentLevel];
+			_level = Levels[CurrentLevel];
 
 			_player = GetNode<Player>("Player");
 			_player.Position = GetNode<Marker2D>("PlayerSpawnLocation").Position;
-
+			_player.PlayerDied += OnPlayerDied;
 
 			_nestEventHandlers = new System.Collections.Generic.Dictionary<Area2D, Area2D.AreaEnteredEventHandler>();
 
@@ -31,6 +37,7 @@ namespace PlatypusGame
 				if (child is Area2D)
 				{
 					Area2D areaNode = (Area2D)child;
+					
 					void nestEnteredHandler(Area2D hitBy) => OnNestEntered(hitBy, areaNode);
 
 					_nestEventHandlers.Add(areaNode, nestEnteredHandler);
@@ -45,23 +52,26 @@ namespace PlatypusGame
 
 		private void StartLevel()
 		{
-			foreach (EnemyData enemyData in _currentLevel.Enemies)
+			foreach (EnemyData enemyData in _level.Enemies)
 			{
 				Timer timer = new Timer();
 				timer.Name = enemyData.GetEnemyName() + "SpawnTimer";
 				timer.WaitTime = enemyData.SpawnInterval;
 				EnemyData thisEnemyData = enemyData;
-				timer.Connect(Timer.SignalName.Timeout, Callable.From(() =>
+
+				timer.Timeout += () =>
 				{
-					Enemy enemy = thisEnemyData.Scene.Instantiate<Enemy>();
-					InitializeEnemy(enemy, thisEnemyData.Speed, thisEnemyData.SpawnLocation);
-				}));
+                    Enemy enemy = thisEnemyData.Scene.Instantiate<Enemy>();
+                    InitializeEnemy(enemy, thisEnemyData.Speed, thisEnemyData.SpawnLocation);
+                };
+				
 				AddChild(timer);
+				_timers.Add(timer);
 				timer.Start();
 			}
 		}
 
-		private void InitializeEnemy(Enemy enemy, int speed, int spawnLocation)
+        private void InitializeEnemy(Enemy enemy, int speed, int spawnLocation)
 		{
 			enemy.Speed = speed;
 
@@ -90,6 +100,15 @@ namespace PlatypusGame
 				whichNest.AddChild(sprite);
 
 				whichNest.AreaEntered -= _nestEventHandlers[whichNest];
+			}
+		}
+
+		private void OnPlayerDied()
+		{
+			foreach (Timer timer in _timers)
+			{
+				timer.Stop();
+				timer.QueueFree();
 			}
 		}
 	}

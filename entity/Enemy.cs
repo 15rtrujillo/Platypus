@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-namespace PlatypusGame.Entity
+namespace Platypus.Entity
 {
 	public partial class Enemy : Area2D
 	{
@@ -38,7 +38,20 @@ namespace PlatypusGame.Entity
 			}
 		}
 
-		public override void _Process(double delta)
+		private VisibleOnScreenNotifier2D _onScreenNotifier;
+
+        public override void _Ready()
+        {
+			_onScreenNotifier = GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D");
+			_onScreenNotifier.ScreenExited += OnVisibleOnScreenNotifier2DScreenExited;
+        }
+
+        public override void _ExitTree()
+        {
+            _onScreenNotifier.ScreenExited -= OnVisibleOnScreenNotifier2DScreenExited;
+        }
+
+        public override void _Process(double delta)
 		{
 			Position += Direction * Speed * (float)delta;
 		}

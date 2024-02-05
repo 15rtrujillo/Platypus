@@ -1,7 +1,8 @@
 using Godot;
 using System;
+using System.IO;
 
-namespace PlatypusGame.Levels
+namespace Platypus.Levels
 {
     [GlobalClass]
     public partial class EnemyData : Resource
@@ -19,9 +20,7 @@ namespace PlatypusGame.Levels
 
         public string GetEnemyName()
         {
-            int firstLetterIndex = Scene.ResourcePath.LastIndexOf("/") + 1;
-            int dotIndex = Scene.ResourcePath.IndexOf(".");
-            return Scene.ResourcePath.Substring(firstLetterIndex, dotIndex - firstLetterIndex);
+            return Path.GetFileNameWithoutExtension(Scene.ResourcePath);
         }
     }
 }

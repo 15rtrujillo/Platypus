@@ -24,5 +24,3 @@ target_position = Vector2(0, -50)
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
-
-[connection signal="area_entered" from="." to="." method="OnAreaEntered"]

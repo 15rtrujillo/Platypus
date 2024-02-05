@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-namespace PlatypusGame.Levels
+namespace Platypus.Levels
 {
 	[GlobalClass]
 	public partial class Level : Resource
