@@ -8,7 +8,6 @@ radius = 19.0
 height = 92.0
 
 [node name="Player" type="Area2D"]
-monitorable = false
 script = ExtResource("1_7ub02")
 metadata/_edit_group_ = true
 
@@ -18,4 +17,10 @@ texture = ExtResource("1_x7d8f")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_4vprq")
 
-[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, -50)
+enabled = false
+target_position = Vector2(0, -50)
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false

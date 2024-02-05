@@ -1,47 +1,64 @@
 using Godot;
 using System;
 
-public partial class Enemy : Area2D
+namespace Platypus.Entity
 {
-	public int Speed { get; set; } = 100;
-	
-	private Color _spriteColor = new Color(Colors.White);
-	public Color SpriteColor { 
-		get
-		{
-			return _spriteColor;
-		}
-		set
-		{
-			GetNode<Sprite2D>("Sprite2D").Modulate = value;
-			_spriteColor = value;
-		}
-	}
-	
-	private Vector2 _direction = Vector2.Left;
-	public Vector2 Direction
+	public partial class Enemy : Area2D
 	{
-		get
+		public int Speed { get; set; } = 100;
+
+		private Color _spriteColor = new Color(Colors.White);
+		public Color SpriteColor
 		{
-			return _direction;
-		}
-		set
-		{
-			if (value == Vector2.Right)
+			get
 			{
-				GetNode<Sprite2D>("Sprite2D").FlipH = true;
+				return _spriteColor;
 			}
-			_direction = value;
+			set
+			{
+				GetNode<Sprite2D>("Sprite2D").Modulate = value;
+				_spriteColor = value;
+			}
 		}
-	}
-	
-	public override void _Process(double delta)
-	{
-		Position += Direction * Speed * (float)delta;
-	}
-	
-	private void OnVisibleOnScreenNotifier2DScreenExited()
-	{
-		QueueFree();
+
+		private Vector2 _direction = Vector2.Left;
+		public Vector2 Direction
+		{
+			get
+			{
+				return _direction;
+			}
+			set
+			{
+				if (value == Vector2.Right)
+				{
+					GetNode<Sprite2D>("Sprite2D").FlipH = true;
+				}
+				_direction = value;
+			}
+		}
+
+		private VisibleOnScreenNotifier2D _onScreenNotifier;
+
+        public override void _Ready()
+        {
+			_onScreenNotifier = GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D");
+			_onScreenNotifier.ScreenExited += OnVisibleOnScreenNotifier2DScreenExited;
+        }
+
+        public override void _ExitTree()
+        {
+            _onScreenNotifier.ScreenExited -= OnVisibleOnScreenNotifier2DScreenExited;
+        }
+
+        public override void _Process(double delta)
+		{
+			Position += Direction * Speed * (float)delta;
+		}
+
+		private void OnVisibleOnScreenNotifier2DScreenExited()
+		{
+			QueueFree();
+		}
 	}
 }

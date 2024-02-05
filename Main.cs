@@ -1,72 +1,115 @@
 using Godot;
 using System;
 
-public partial class Main : Node
+using Platypus.Entity;
+using Platypus.Levels;
+
+namespace Platypus
 {
-	[ExportGroup("Levels")]
-    // Debug option for starting at a certain level. The levels are zero-indexed.
-    [Export]
-    public int BeginAtLevel { get; set; } = 0;
-    [Export]
-	public Godot.Collections.Array<Level> Levels { get; set; }
-	
-	private int _currentLevel;
-	private Player _player;
-	private PackedScene _sedanScene;
-	private PackedScene _semi_TruckScene;
-    private PackedScene _coupeScene;
+	public partial class Main : Node
+	{
+		[ExportGroup("Levels")]
+		[Export]
+		public int CurrentLevel { get; set; } = 0;
+		[Export]
+		public Godot.Collections.Array<Level> Levels { get; set; }
 
-    public override void _Ready()
-	{
-		_player = GetNode<Player>("Player");
-		_player.Position = GetNode<Marker2D>("SpawnLocation").Position;
-		
-		_sedanScene = ResourceLoader.Load<PackedScene>("res://entity/Sedan.tscn");
-		_semi_TruckScene = ResourceLoader.Load<PackedScene>("res://entity/Semi_Truck.tscn");
-		_coupeScene = ResourceLoader.Load<PackedScene>("res://entity/Coupe.tscn");
+		private Level _level;
+		private Player _player;
+		private int _score = 0;
+		private int _lives = 5;
 
-		StartLevel();
-	}
-	
-	private void StartLevel()
-	{
-		Timer truckSpawnTimer = GetNode<Timer>("Semi_TruckSpawnTimer");
-		truckSpawnTimer.WaitTime = Levels[_currentLevel].SemiTruckSpawnInterval;
-		truckSpawnTimer.Start();
+		private System.Collections.Generic.Dictionary<Area2D, Area2D.AreaEnteredEventHandler> _nestEventHandlers;
+		private System.Collections.Generic.IList<Timer> _timers = new System.Collections.Generic.List<Timer>();
 
-		Timer sedanSpawnTimer = GetNode<Timer>("SedanSpawnTimer");
-		sedanSpawnTimer.WaitTime = Levels[_currentLevel].SedanSpawnInterval;
-        sedanSpawnTimer.Start();
+		public override void _Ready()
+		{
+			_level = Levels[CurrentLevel];
 
-		Timer coupeSpawnTimer = GetNode<Timer>("CoupeSpawnTimer");
-		coupeSpawnTimer.WaitTime = Levels[_currentLevel].CoupeSpawnInterval;
-		coupeSpawnTimer.Start();
-	}
-	
-	private void InitializeEnemy(Enemy enemy, int speed, Vector2 direction)
-	{
-		enemy.Speed = speed;
-		enemy.Direction = direction;
-		enemy.SpriteColor = new Color((float)GD.RandRange(0.1, 1.0), (float)GD.RandRange(0.1, 1.0), (float)GD.RandRange(0.1, 1.0));
-		enemy.Position = GetNode<Marker2D>($"{enemy.Name}SpawnLocation").Position;
-		AddChild(enemy);
-	}
-	
-	private void OnSedanSpawnTimerTimeout()
-	{
-		Enemy sedan = _sedanScene.Instantiate<Enemy>();
-		InitializeEnemy(sedan, Levels[_currentLevel].SedanSpeed, Vector2.Left);
-	}
-	
-	private void OnSemi_TruckSpawnTimerTimeout()
-	{
-		Enemy semi_Truck = _semi_TruckScene.Instantiate<Enemy>();
-		InitializeEnemy(semi_Truck, Levels[_currentLevel].SemiTruckSpeed, Vector2.Right);
-	}
+			_player = GetNode<Player>("Player");
+			_player.Position = GetNode<Marker2D>("PlayerSpawnLocation").Position;
+			_player.PlayerDied += OnPlayerDied;
 
-	private void OnCoupeSpawnTimerTimeout()
-	{
-		Enemy coupe = _coupeScene.Instantiate<Enemy>();
-		InitializeEnemy(coupe, Levels[_currentLevel].CoupeSpeed, Vector2.Right);
+			_nestEventHandlers = new System.Collections.Generic.Dictionary<Area2D, Area2D.AreaEnteredEventHandler>();
+
+			foreach (Node child in GetNode<Node2D>("Playfield").GetChildren())
+			{
+				if (child is Area2D)
+				{
+					Area2D areaNode = (Area2D)child;
+					
+					void nestEnteredHandler(Area2D hitBy) => OnNestEntered(hitBy, areaNode);
+
+					_nestEventHandlers.Add(areaNode, nestEnteredHandler);
+
+					areaNode.AreaEntered += nestEnteredHandler;
+				}
+			}
+
+
+			StartLevel();
+		}
+
+		private void StartLevel()
+		{
+			foreach (EnemyData enemyData in _level.Enemies)
+			{
+				Timer timer = new Timer();
+				timer.Name = enemyData.GetEnemyName() + "SpawnTimer";
+				timer.WaitTime = enemyData.SpawnInterval;
+				EnemyData thisEnemyData = enemyData;
+
+				timer.Timeout += () =>
+				{
+                    Enemy enemy = thisEnemyData.Scene.Instantiate<Enemy>();
+                    InitializeEnemy(enemy, thisEnemyData.Speed, thisEnemyData.SpawnLocation);
+                };
+				
+				AddChild(timer);
+				_timers.Add(timer);
+				timer.Start();
+			}
+		}
+
+        private void InitializeEnemy(Enemy enemy, int speed, int spawnLocation)
+		{
+			enemy.Speed = speed;
+
+			Vector2 direction = Vector2.Right;
+			if (spawnLocation == 1 || spawnLocation == 2)
+			{
+				direction = Vector2.Left;
+			}
+			enemy.Direction = direction;
+
+			enemy.SpriteColor = new Color((float)GD.RandRange(0.2, 1.0), (float)GD.RandRange(0.2, 1.0), (float)GD.RandRange(0.2, 1.0));
+
+			enemy.Position = GetNode<Marker2D>($"SpawnLocation{spawnLocation}").Position;
+			AddChild(enemy);
+		}
+
+		private void OnNestEntered(Area2D area, Area2D whichNest)
+		{
+			// Probably increment some score
+
+			if (area is Player player)
+			{
+				player.Position = GetNode<Marker2D>("PlayerSpawnLocation").Position;
+				Sprite2D sprite = new Sprite2D();
+				sprite.Texture = ResourceLoader.Load<Texture2D>("res://entity/platypus.png");
+				whichNest.AddChild(sprite);
+
+				whichNest.AreaEntered -= _nestEventHandlers[whichNest];
+			}
+		}
+
+		private void OnPlayerDied()
+		{
+			foreach (Timer timer in _timers)
+			{
+				timer.Stop();
+				timer.QueueFree();
+			}
+		}
 	}
 }
