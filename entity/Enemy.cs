@@ -40,18 +40,18 @@ namespace Platypus.Entity
 
 		private VisibleOnScreenNotifier2D _onScreenNotifier;
 
-        public override void _Ready()
-        {
+		public override void _Ready()
+		{
 			_onScreenNotifier = GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D");
 			_onScreenNotifier.ScreenExited += OnVisibleOnScreenNotifier2DScreenExited;
-        }
+		}
 
-        public override void _ExitTree()
-        {
-            _onScreenNotifier.ScreenExited -= OnVisibleOnScreenNotifier2DScreenExited;
-        }
+		public override void _ExitTree()
+		{
+			_onScreenNotifier.ScreenExited -= OnVisibleOnScreenNotifier2DScreenExited;
+		}
 
-        public override void _Process(double delta)
+		public override void _Process(double delta)
 		{
 			Position += Direction * Speed * (float)delta;
 		}

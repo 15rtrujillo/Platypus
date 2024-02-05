@@ -1,0 +1,98 @@
+[gd_scene load_steps=7 format=3 uid="uid://0g67yoct4vdq"]
+
+[ext_resource type="FontFile" uid="uid://bbf707lch8yew" path="res://fonts/PressStart2P/PressStart2P-codeman38.ttf" id="1_vv6gj"]
+[ext_resource type="Script" path="res://ui/MainUI.cs" id="2_wslpa"]
+[ext_resource type="PackedScene" uid="uid://y3q8vxv2hi22" path="res://ui/Life.tscn" id="3_8eeyy"]
+
+[sub_resource type="Theme" id="Theme_nwhgr"]
+default_font = ExtResource("1_vv6gj")
+default_font_size = 36
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5csvj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3lku"]
+bg_color = Color(0, 0.733333, 0, 1)
+
+[node name="MainUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_nwhgr")
+script = ExtResource("2_wslpa")
+
+[node name="TopContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 100.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="OneUpLabel" type="Label" parent="TopContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1-UP
+0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="TopContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SCORE
+0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BottomContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="LivesOrderer" type="HBoxContainer" parent="BottomContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Life1" parent="BottomContainer/LivesOrderer" instance=ExtResource("3_8eeyy")]
+layout_mode = 2
+
+[node name="Life2" parent="BottomContainer/LivesOrderer" instance=ExtResource("3_8eeyy")]
+layout_mode = 2
+
+[node name="Life3" parent="BottomContainer/LivesOrderer" instance=ExtResource("3_8eeyy")]
+layout_mode = 2
+
+[node name="Life4" parent="BottomContainer/LivesOrderer" instance=ExtResource("3_8eeyy")]
+layout_mode = 2
+
+[node name="TimerContainer" type="HBoxContainer" parent="BottomContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="BottomContainer/TimerContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 3.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_5csvj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_n3lku")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="TimeLabel" type="Label" parent="BottomContainer/TimerContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "TIME"
+horizontal_alignment = 2
+vertical_alignment = 1

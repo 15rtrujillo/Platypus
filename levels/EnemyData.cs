@@ -13,7 +13,7 @@ namespace Platypus.Levels
         public int Speed { get; set; }
 
         [ExportGroup("Spawning")]
-        [Export(PropertyHint.Range, "0-4")]
+        [Export(PropertyHint.Range, "0,4,")]
         public int SpawnLocation { get; set; }
         [Export]
         public float SpawnInterval { get; set; }

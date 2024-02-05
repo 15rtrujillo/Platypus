@@ -3,123 +3,123 @@ using System;
 
 namespace Platypus.Entity
 {
-    public partial class Player : Area2D
-    {
-        [ExportGroup("Playfield Boundary")]
-        [Export]
-        public Vector2 MinBound { get; set; } = new Vector2(25, 125);
-        [Export]
-        public Vector2 MaxBound { get; set; } = new Vector2(1025, 1375);
+	public partial class Player : Area2D
+	{
+		[ExportGroup("Playfield Boundary")]
+		[Export]
+		public Vector2 MinBound { get; set; } = new Vector2(25, 125);
+		[Export]
+		public Vector2 MaxBound { get; set; } = new Vector2(1025, 1375);
 
-        [ExportGroup("Water Boundary")]
-        [Export]
-        public Vector2 MinWaterBound { get; set; } = new Vector2(0, 200);
-        [Export]
-        public Vector2 MaxWaterBound { get; set; } = new Vector2(1050, 700);
+		[ExportGroup("Water Boundary")]
+		[Export]
+		public Vector2 MinWaterBound { get; set; } = new Vector2(0, 200);
+		[Export]
+		public Vector2 MaxWaterBound { get; set; } = new Vector2(1050, 700);
 
-        public delegate void PlayerDiedEventHandler();
-        public event PlayerDiedEventHandler PlayerDied;
+		public delegate void PlayerDiedEventHandler();
+		public event PlayerDiedEventHandler PlayerDied;
 
-        private Vector2 _newPosition;
-        private bool _isMoving = false;
+		private Vector2 _newPosition;
+		private bool _isMoving = false;
 
-        public override void _Ready()
-        {
-            AreaEntered += OnAreaEntered;
-        }
+		public override void _Ready()
+		{
+			AreaEntered += OnAreaEntered;
+		}
 
-        public override void _UnhandledKeyInput(InputEvent @event)
-        {
-            if (@event is InputEventKey)
-            {
-                Sprite2D sprite = GetNode<Sprite2D>("Sprite2D");
-                int spriteX = sprite.Texture.GetWidth();
-                int spriteY = sprite.Texture.GetHeight();
+		public override void _UnhandledKeyInput(InputEvent @event)
+		{
+			if (@event is InputEventKey)
+			{
+				Sprite2D sprite = GetNode<Sprite2D>("Sprite2D");
+				int spriteX = sprite.Texture.GetWidth();
+				int spriteY = sprite.Texture.GetHeight();
 
-                _newPosition = Position;
+				_newPosition = Position;
 
-                if (@event.IsActionPressed("move_up"))
-                {
-                    _newPosition -= new Vector2(0, spriteY);
-                    Rotation = 0;
-                }
-                else if (@event.IsActionPressed("move_down"))
-                {
-                    _newPosition += new Vector2(0, spriteY);
-                    Rotation = Mathf.Pi;
-                }
-                else if (@event.IsActionPressed("move_left"))
-                {
-                    _newPosition -= new Vector2(spriteX, 0);
-                    Rotation = (3.0f * Mathf.Pi) / 2.0f;
-                }
-                else if (@event.IsActionPressed("move_right"))
-                {
-                    _newPosition += new Vector2(spriteX, 0);
-                    Rotation = Mathf.Pi / 2.0f;
-                }
+				if (@event.IsActionPressed("move_up"))
+				{
+					_newPosition -= new Vector2(0, spriteY);
+					Rotation = 0;
+				}
+				else if (@event.IsActionPressed("move_down"))
+				{
+					_newPosition += new Vector2(0, spriteY);
+					Rotation = Mathf.Pi;
+				}
+				else if (@event.IsActionPressed("move_left"))
+				{
+					_newPosition -= new Vector2(spriteX, 0);
+					Rotation = (3.0f * Mathf.Pi) / 2.0f;
+				}
+				else if (@event.IsActionPressed("move_right"))
+				{
+					_newPosition += new Vector2(spriteX, 0);
+					Rotation = Mathf.Pi / 2.0f;
+				}
 
-                if (_newPosition != Position)
-                {
-                    _isMoving = true;
-                    GetViewport().SetInputAsHandled();
-                }
-            }
-        }
+				if (_newPosition != Position)
+				{
+					_isMoving = true;
+					GetViewport().SetInputAsHandled();
+				}
+			}
+		}
 
-        public override void _PhysicsProcess(double delta)
-        {
-            // Check for drowning
-            if (_isMoving && IsInWater(_newPosition))
-            {
-                RayCast2D rayCast = GetNode<RayCast2D>("RayCast2D");
-                rayCast.Enabled = true;
-                rayCast.ForceRaycastUpdate();
-                if (rayCast.IsColliding())
-                {
-                    GD.Print("Hit something!" + ((Node)rayCast.GetCollider()).Name);
-                }
+		public override void _PhysicsProcess(double delta)
+		{
+			// Check for drowning
+			if (_isMoving && IsInWater(_newPosition))
+			{
+				RayCast2D rayCast = GetNode<RayCast2D>("RayCast2D");
+				rayCast.Enabled = true;
+				rayCast.ForceRaycastUpdate();
+				if (rayCast.IsColliding())
+				{
+					GD.Print("Hit something!" + ((Node)rayCast.GetCollider()).Name);
+				}
 
-                else
-                {
-                    GD.Print("You drowned!");
-                    // Die();
-                }
-                rayCast.Enabled = false;
-            }
+				else
+				{
+					GD.Print("You drowned!");
+					// Die();
+				}
+				rayCast.Enabled = false;
+			}
 
-            if (_isMoving && IsInPlayfield(_newPosition))
-            {
-                Position = _newPosition;
-                _isMoving = false;
-            }
-        }
+			if (_isMoving && IsInPlayfield(_newPosition))
+			{
+				Position = _newPosition;
+				_isMoving = false;
+			}
+		}
 
-        private bool IsInPlayfield(Vector2 position)
-        {
-            return position.X > MinBound.X && position.Y > MinBound.Y
-                    && position.X < MaxBound.X && position.Y < MaxBound.Y;
-        }
+		private bool IsInPlayfield(Vector2 position)
+		{
+			return position.X > MinBound.X && position.Y > MinBound.Y
+					&& position.X < MaxBound.X && position.Y < MaxBound.Y;
+		}
 
-        private bool IsInWater(Vector2 position)
-        {
-            return position.X > MinWaterBound.X && position.Y > MinWaterBound.Y
-                    && position.X < MaxWaterBound.X && position.Y < MaxWaterBound.Y;
+		private bool IsInWater(Vector2 position)
+		{
+			return position.X > MinWaterBound.X && position.Y > MinWaterBound.Y
+					&& position.X < MaxWaterBound.X && position.Y < MaxWaterBound.Y;
 
-        }
+		}
 
-        private void Die()
-        {
-            PlayerDied?.Invoke();
-            Hide();
-        }
+		private void Die()
+		{
+			PlayerDied?.Invoke();
+			Hide();
+		}
 
-        private void OnAreaEntered(Area2D area)
-        {
-            if (area is Enemy)
-            {
-                Die();
-            }
-        }
-    }
+		private void OnAreaEntered(Area2D area)
+		{
+			if (area is Enemy)
+			{
+				Die();
+			}
+		}
+	}
 }
