@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Platypus.UserInterface
 {
-	public partial class MainUI : Control
+	public partial class GameUI : Control
 	{
 		private Label _oneUpLabel;
 		private Label _scoreLabel;

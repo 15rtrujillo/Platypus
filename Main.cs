@@ -20,14 +20,14 @@ namespace Platypus
 		private Timer _levelTimer;
 		private Player _player;
 		private Marker2D _playerSpawn;
-		private MainUI _mainUI;
+		private GameUI _mainUI;
 		private int _score = 0;
 		private int _lives = 4;
 		private int _totalTicks;
 		private int _currentTick = 0;
 
-		private Dictionary<Area2D, Area2D.AreaEnteredEventHandler> _nestEventHandlers;
-		private Dictionary<Timer, Action> _timers = new Dictionary<Timer, Action>();
+		private readonly Dictionary<Area2D, Area2D.AreaEnteredEventHandler> _nestEventHandlers = new();
+		private readonly Dictionary<Timer, Action> _timers = new();
 
 		public override void _Ready()
 		{
@@ -41,9 +41,7 @@ namespace Platypus
 
 			_playerSpawn = GetNode<Marker2D>("PlayerSpawnLocation");
 
-			_mainUI = GetNode<MainUI>("MainUI");
-
-			_nestEventHandlers = new System.Collections.Generic.Dictionary<Area2D, Area2D.AreaEnteredEventHandler>();
+			_mainUI = GetNode<GameUI>("MainUI");
 
 			StartLevel();
 		}
@@ -111,15 +109,10 @@ namespace Platypus
 		private void InitializeEnemy(Enemy enemy, int speed, int spawnLocation)
 		{
 			enemy.Speed = speed;
+			
+			enemy.Direction = (spawnLocation == 1 || spawnLocation == 2) ? Vector2.Left : Vector2.Right;
 
-			Vector2 direction = Vector2.Right;
-			if (spawnLocation == 1 || spawnLocation == 2)
-			{
-				direction = Vector2.Left;
-			}
-			enemy.Direction = direction;
-
-			enemy.SpriteColor = new Color((float)GD.RandRange(0.2, 1.0), (float)GD.RandRange(0.2, 1.0), (float)GD.RandRange(0.2, 1.0));
+			enemy.SpriteColor = new((float)GD.RandRange(0.2, 1.0), (float)GD.RandRange(0.2, 1.0), (float)GD.RandRange(0.2, 1.0));
 
 			enemy.Position = GetNode<Marker2D>($"SpawnLocation{spawnLocation}").Position;
 			AddChild(enemy);
@@ -146,7 +139,7 @@ namespace Platypus
 		private void OnPlayerDied()
 		{
 			_player.Position = _playerSpawn.Position;
-			_lives--;
+			--_lives;
 			_mainUI.RemoveLife();
 
 			foreach ((Timer timer, Action action) in _timers)

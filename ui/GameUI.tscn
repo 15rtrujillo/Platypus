@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://0g67yoct4vdq"]
 
 [ext_resource type="FontFile" uid="uid://bbf707lch8yew" path="res://fonts/PressStart2P/PressStart2P-codeman38.ttf" id="1_vv6gj"]
-[ext_resource type="Script" path="res://ui/MainUI.cs" id="2_wslpa"]
+[ext_resource type="Script" path="res://ui/GameUI.cs" id="2_wslpa"]
 [ext_resource type="PackedScene" uid="uid://y3q8vxv2hi22" path="res://ui/Life.tscn" id="3_8eeyy"]
 
-[sub_resource type="Theme" id="Theme_nwhgr"]
+[sub_resource type="Theme" id="Theme_58653"]
 default_font = ExtResource("1_vv6gj")
 default_font_size = 36
 
@@ -20,7 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_nwhgr")
+theme = SubResource("Theme_58653")
 script = ExtResource("2_wslpa")
 
 [node name="TopContainer" type="HBoxContainer" parent="."]

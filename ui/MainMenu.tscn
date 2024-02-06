@@ -1,0 +1,174 @@
+[gd_scene load_steps=11 format=3 uid="uid://d26mpehvilf1m"]
+
+[ext_resource type="Script" path="res://ui/MainMenu.cs" id="1_bqpjt"]
+[ext_resource type="FontFile" uid="uid://bbf707lch8yew" path="res://fonts/PressStart2P/PressStart2P-codeman38.ttf" id="2_d7ki2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2q00l"]
+bg_color = Color(0, 0, 0, 0.4)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v8n86"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4sm8d"]
+bg_color = Color(0, 0, 0, 0.4)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+
+[sub_resource type="Theme" id="Theme_jhakw"]
+default_font = ExtResource("2_d7ki2")
+default_font_size = 72
+Button/styles/hover = SubResource("StyleBoxFlat_2q00l")
+Button/styles/normal = SubResource("StyleBoxFlat_v8n86")
+Button/styles/pressed = SubResource("StyleBoxFlat_4sm8d")
+
+[sub_resource type="InputEventAction" id="InputEventAction_v7gt4"]
+action = &"ui_accept"
+
+[sub_resource type="Shortcut" id="Shortcut_tyrmp"]
+events = [SubResource("InputEventAction_v7gt4")]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x6koi"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_qc24k"]
+
+[node name="MainMenu" type="Control"]
+z_index = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_jhakw")
+script = ExtResource("1_bqpjt")
+
+[node name="Base" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Base"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.215686, 0.403922, 1)
+
+[node name="TitleLabel" type="Label" parent="Base"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 389.0
+offset_bottom = 461.0
+grow_horizontal = 2
+text = "Platypus"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="Base"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -292.0
+offset_top = -32.0
+offset_right = 292.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+shortcut = SubResource("Shortcut_tyrmp")
+text = "Start"
+
+[node name="LicensesButton" type="Button" parent="Base"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -294.0
+offset_top = 288.0
+offset_right = 294.0
+offset_bottom = 455.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Licenses"
+
+[node name="Licenses" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Licenses"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 100
+
+[node name="ColorRect" type="ColorRect" parent="Licenses/MarginContainer"]
+layout_mode = 2
+color = Color(0, 0.215686, 0.403922, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Licenses/MarginContainer"]
+layout_mode = 2
+
+[node name="LicensesLabel" type="Label" parent="Licenses/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Licenses"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="Licenses/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_x6koi")
+
+[node name="LicenseText" type="RichTextLabel" parent="Licenses/MarginContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = SubResource("SystemFont_qc24k")
+theme_override_font_sizes/normal_font_size = 36
+text = "Licenses"
+
+[node name="CloseButton" type="Button" parent="Licenses/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(450, 125)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Close"
