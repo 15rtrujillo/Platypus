@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d26mpehvilf1m"]
+[gd_scene load_steps=10 format=3 uid="uid://d26mpehvilf1m"]
 
 [ext_resource type="Script" path="res://ui/MainMenu.cs" id="1_bqpjt"]
 [ext_resource type="FontFile" uid="uid://bbf707lch8yew" path="res://fonts/PressStart2P/PressStart2P-codeman38.ttf" id="2_d7ki2"]
@@ -31,16 +31,15 @@ Button/styles/hover = SubResource("StyleBoxFlat_2q00l")
 Button/styles/normal = SubResource("StyleBoxFlat_v8n86")
 Button/styles/pressed = SubResource("StyleBoxFlat_4sm8d")
 
-[sub_resource type="InputEventAction" id="InputEventAction_v7gt4"]
-action = &"ui_accept"
-
-[sub_resource type="Shortcut" id="Shortcut_tyrmp"]
-events = [SubResource("InputEventAction_v7gt4")]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x6koi"]
 bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="SystemFont" id="SystemFont_qc24k"]
+font_names = PackedStringArray("Arial")
+
+[sub_resource type="SystemFont" id="SystemFont_7xwv1"]
+font_names = PackedStringArray("Arial")
+font_weight = 700
 
 [node name="MainMenu" type="Control"]
 z_index = 3
@@ -94,7 +93,6 @@ offset_right = 292.0
 offset_bottom = 135.0
 grow_horizontal = 2
 grow_vertical = 2
-shortcut = SubResource("Shortcut_tyrmp")
 text = "Start"
 
 [node name="LicensesButton" type="Button" parent="Base"]
@@ -113,12 +111,14 @@ grow_vertical = 2
 text = "Licenses"
 
 [node name="Licenses" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Licenses"]
 layout_mode = 1
@@ -152,18 +152,28 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_x6koi")
 
-[node name="LicenseText" type="RichTextLabel" parent="Licenses/MarginContainer/VBoxContainer/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Licenses/MarginContainer/VBoxContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="LicenseText" type="RichTextLabel" parent="Licenses/MarginContainer/VBoxContainer/Panel/MarginContainer"]
+layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = SubResource("SystemFont_qc24k")
-theme_override_font_sizes/normal_font_size = 36
+theme_override_fonts/bold_font = SubResource("SystemFont_7xwv1")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
 text = "Licenses"
 
 [node name="CloseButton" type="Button" parent="Licenses/MarginContainer/VBoxContainer"]
