@@ -176,7 +176,7 @@ namespace Platypus
 			
 			if (_currentTick >= _totalTicks)
 			{
-				OnPlayerDied("ran out of time");
+				OnPlayerDied("just ran out of time");
 			}
 		}
 	}
