@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://y3q8vxv2hi22"]
 
-[ext_resource type="Texture2D" uid="uid://ksw45ai1808u" path="res://entity/platypus.png" id="1_fq5fc"]
+[ext_resource type="Texture2D" uid="uid://ksw45ai1808u" path="res://entity/player/platypus.png" id="1_fq5fc"]
 
 [node name="Life" type="TextureRect"]
 size_flags_horizontal = 3

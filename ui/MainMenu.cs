@@ -11,6 +11,7 @@ namespace Platypus.UserInterface
 		private Button _closeButton;
 		private RichTextLabel _licenseText;
 		private readonly string _fontLicensePath = "res://fonts/PressStart2P/LICENSE-65f9.txt";
+		private readonly PackedScene _mainScene = ResourceLoader.Load<PackedScene>("res://Main.tscn");
 
 		public override void _Ready()
 		{
@@ -85,7 +86,7 @@ namespace Platypus.UserInterface
 
 		private void OnStartButtonPressed()
 		{
-			GD.Print("Start button clicked!");
+			GetTree().ChangeSceneToPacked(_mainScene);
 		}
 
 		private void OnLicensesButtonPressed()

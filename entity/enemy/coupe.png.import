@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvt0d6vssjxyn"
-path="res://.godot/imported/sedan.png-c3dc1ebd4d28c26ccdf62f567e37bc8a.ctex"
+uid="uid://by0wyobvhwieb"
+path="res://.godot/imported/coupe.png-e9513909941389d3ad04cceceb5a9f15.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entity/sedan.png"
-dest_files=["res://.godot/imported/sedan.png-c3dc1ebd4d28c26ccdf62f567e37bc8a.ctex"]
+source_file="res://entity/enemy/coupe.png"
+dest_files=["res://.godot/imported/coupe.png-e9513909941389d3ad04cceceb5a9f15.ctex"]
 
 [params]
 

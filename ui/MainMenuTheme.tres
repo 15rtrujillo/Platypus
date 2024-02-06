@@ -1,0 +1,31 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dqsqfy6ll7gmw"]
+
+[ext_resource type="FontFile" uid="uid://bbf707lch8yew" path="res://fonts/PressStart2P/PressStart2P-codeman38.ttf" id="1_iavuv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2q00l"]
+bg_color = Color(0, 0, 0, 0.4)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v8n86"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4sm8d"]
+bg_color = Color(0, 0, 0, 0.4)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+
+[resource]
+default_font = ExtResource("1_iavuv")
+default_font_size = 72
+Button/styles/hover = SubResource("StyleBoxFlat_2q00l")
+Button/styles/normal = SubResource("StyleBoxFlat_v8n86")
+Button/styles/pressed = SubResource("StyleBoxFlat_4sm8d")

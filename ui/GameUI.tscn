@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://ui/GameUI.cs" id="2_wslpa"]
 [ext_resource type="PackedScene" uid="uid://y3q8vxv2hi22" path="res://ui/Life.tscn" id="3_8eeyy"]
 
-[sub_resource type="Theme" id="Theme_58653"]
+[sub_resource type="Theme" id="Theme_j3i5y"]
 default_font = ExtResource("1_vv6gj")
 default_font_size = 36
 
@@ -20,7 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_58653")
+theme = SubResource("Theme_j3i5y")
 script = ExtResource("2_wslpa")
 
 [node name="TopContainer" type="HBoxContainer" parent="."]

@@ -4,6 +4,7 @@ using Platypus.Levels;
 using Platypus.UserInterface;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Platypus
 {
@@ -19,7 +20,8 @@ namespace Platypus
 		private Timer _levelTimer;
 		private Player _player;
 		private Marker2D _playerSpawn;
-		private GameUI _mainUI;
+		private GameUI _gameUI;
+		private MessageBox _messageBox;
 		private int _score = 0;
 		private int _lives = 4;
 		private int _totalTicks;
@@ -40,12 +42,14 @@ namespace Platypus
 
 			_playerSpawn = GetNode<Marker2D>("PlayerSpawnLocation");
 
-			_mainUI = GetNode<GameUI>("MainUI");
+			_gameUI = GetNode<GameUI>("MainUI");
+
+			_messageBox = GetNode<MessageBox>("MessageBox");
 
 			StartLevel();
 		}
 
-		private void StartLevel()
+		private async void StartLevel()
 		{
 			_player.Position = _playerSpawn.Position;
 			_player.Show();
@@ -55,6 +59,9 @@ namespace Platypus
 			SetupNestEventHandlers();
 			SetupEnemyTimers();
 
+			await _messageBox.DisplayMessage("Get ready!");
+
+			_player.CanMove = true;
 			_levelTimer.Start();
 		}
 
@@ -65,6 +72,9 @@ namespace Platypus
 				if (child is Area2D)
 				{
 					Area2D areaNode = (Area2D)child;
+
+					// Make sure we don't add duplicate handlers if we're restarting the level
+					if (_nestEventHandlers.Keys.Contains(areaNode)) continue;
 
 					void nestEnteredHandler(Area2D hitBy)
 					{
@@ -92,8 +102,8 @@ namespace Platypus
 
 				void timerAction()
 				{
-					Enemy enemy = thisEnemyData.Scene.Instantiate<Enemy>();
-					InitializeEnemy(enemy, thisEnemyData.Speed, thisEnemyData.SpawnLocation);
+					Enemy enemy = thisEnemyData.Scene.Instantiate<Car>();
+					InitializeEnemy(enemy, thisEnemyData);
 				}
 
 				timer.Timeout += timerAction;
@@ -105,16 +115,19 @@ namespace Platypus
 			}
 		}
 
-		private void InitializeEnemy(Enemy enemy, int speed, int spawnLocation)
+		private void InitializeEnemy(Enemy enemy, EnemyData enemyData)
 		{
-			enemy.Speed = speed;
-
-			enemy.Direction = (spawnLocation == 1 || spawnLocation == 2) ? Vector2.Left : Vector2.Right;
-
-			enemy.SpriteColor = new((float)GD.RandRange(0.2, 1.0), (float)GD.RandRange(0.2, 1.0), (float)GD.RandRange(0.2, 1.0));
-
-			enemy.Position = GetNode<Marker2D>($"SpawnLocation{spawnLocation}").Position;
 			AddChild(enemy);
+			enemy.Speed = enemyData.Speed;
+
+			enemy.Direction = (enemyData.SpawnLocation == 1 || enemyData.SpawnLocation == 2) ? Vector2.Left : Vector2.Right;
+
+			if (enemy is Car car)
+			{
+				car.SpriteColor = new((float)GD.RandRange(0.2, 1.0), (float)GD.RandRange(0.2, 1.0), (float)GD.RandRange(0.2, 1.0));
+			}
+
+			enemy.Position = GetNode<Marker2D>($"SpawnLocation{enemyData.SpawnLocation}").Position;
 		}
 
 		private void OnNestEntered(Area2D area, Area2D whichNest)
@@ -135,11 +148,13 @@ namespace Platypus
 			}
 		}
 
-		private void OnPlayerDied()
+		private async void OnPlayerDied(string how)
 		{
+			_player.Hide();
+			_player.CanMove = false;
 			_player.Position = _playerSpawn.Position;
 			--_lives;
-			_mainUI.RemoveLife();
+			_gameUI.RemoveLife();
 
 			foreach ((Timer timer, Action action) in _timers)
 			{
@@ -148,11 +163,19 @@ namespace Platypus
 				_timers.Remove(timer);
 				timer.QueueFree();
 			}
+
+			await _messageBox.DisplayMessage($"You {how}!");
+			StartLevel();
 		}
 
 		private void OnLevelTimerTimeout()
 		{
-			_mainUI.UpdateProgressBar(1.0f - (++_currentTick / (float)_totalTicks));
+			_gameUI.UpdateProgressBar(1.0f - (++_currentTick / (float)_totalTicks));
+			
+			if (_currentTick >= _totalTicks)
+			{
+				OnPlayerDied("ran out of time");
+			}
 		}
 	}
 }

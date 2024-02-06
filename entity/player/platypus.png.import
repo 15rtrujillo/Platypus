@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di87loor2g3ku"
-path="res://.godot/imported/semi.png-bdca480a2a9767dc18ecc4195d320eeb.ctex"
+uid="uid://ksw45ai1808u"
+path="res://.godot/imported/platypus.png-e429ee6e9f895f2c810d7bf095d635fe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entity/semi.png"
-dest_files=["res://.godot/imported/semi.png-bdca480a2a9767dc18ecc4195d320eeb.ctex"]
+source_file="res://entity/player/platypus.png"
+dest_files=["res://.godot/imported/platypus.png-e429ee6e9f895f2c810d7bf095d635fe.ctex"]
 
 [params]
 

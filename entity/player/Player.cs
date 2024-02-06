@@ -16,14 +16,19 @@ namespace Platypus.Entity
 		[Export]
 		public Vector2 MaxWaterBound { get; set; } = new Vector2(1050, 700);
 
-		public delegate void PlayerDiedEventHandler();
+		public bool CanMove { get; set; } = false;
+
+		public delegate void PlayerDiedEventHandler(string how);
 		public event PlayerDiedEventHandler PlayerDied;
 
+		private Sprite2D _sprite;
 		private Vector2 _newPosition;
 		private bool _isMoving = false;
 
 		public override void _Ready()
 		{
+			_sprite = GetNode<Sprite2D>("Sprite2D");
+
 			AreaEntered += OnAreaEntered;
 		}
 
@@ -31,30 +36,31 @@ namespace Platypus.Entity
 		{
 			if (@event is InputEventKey)
 			{
-				Sprite2D sprite = GetNode<Sprite2D>("Sprite2D");
-				int spriteX = sprite.Texture.GetWidth();
-				int spriteY = sprite.Texture.GetHeight();
+				if (!CanMove) return;
+
+				int spriteX = _sprite.Texture.GetWidth();
+				int spriteY = _sprite.Texture.GetHeight();
 
 				_newPosition = Position;
 
 				if (@event.IsActionPressed("move_up"))
 				{
-					_newPosition -= new Vector2(0, spriteY);
+					_newPosition += Vector2.Up * spriteY;
 					Rotation = 0;
 				}
 				else if (@event.IsActionPressed("move_down"))
 				{
-					_newPosition += new Vector2(0, spriteY);
+					_newPosition += Vector2.Down * spriteY;
 					Rotation = Mathf.Pi;
 				}
 				else if (@event.IsActionPressed("move_left"))
 				{
-					_newPosition -= new Vector2(spriteX, 0);
-					Rotation = (3.0f * Mathf.Pi) / 2.0f;
+					_newPosition += Vector2.Left * spriteX;
+					Rotation = 3.0f * Mathf.Pi / 2.0f;
 				}
 				else if (@event.IsActionPressed("move_right"))
 				{
-					_newPosition += new Vector2(spriteX, 0);
+					_newPosition += Vector2.Right * spriteX;
 					Rotation = Mathf.Pi / 2.0f;
 				}
 
@@ -107,17 +113,16 @@ namespace Platypus.Entity
 
 		}
 
-		private void Die()
+		private void Die(string how)
 		{
-			PlayerDied?.Invoke();
-			Hide();
+			PlayerDied?.Invoke(how);
 		}
 
 		private void OnAreaEntered(Area2D area)
 		{
-			if (area is Enemy)
+			if (area is Car car)
 			{
-				Die();
+				Die($"got ran over by a {car.CarName.ToLower()}");
 			}
 		}
 	}
