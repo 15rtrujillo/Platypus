@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Level" load_steps=5 format=3 uid="uid://c24sprvy7xhm2"]
 
-[ext_resource type="PackedScene" uid="uid://c4gj4mpst0bhs" path="res://entity/enemy/Coupe.tscn" id="1_nxp2d"]
-[ext_resource type="Script" path="res://levels/EnemyData.cs" id="2_byfks"]
+[ext_resource type="PackedScene" uid="uid://c4gj4mpst0bhs" path="res://entities/enemies/cars/coupe/Coupe.tscn" id="1_nxp2d"]
+[ext_resource type="Script" path="res://levels/EntityData.cs" id="2_4dr2y"]
 [ext_resource type="Script" path="res://levels/Level.cs" id="3_jtn0i"]
 
-[sub_resource type="Resource" id="Resource_8jqcf"]
-script = ExtResource("2_byfks")
+[sub_resource type="Resource" id="Resource_oabn0"]
+script = ExtResource("2_4dr2y")
 Scene = ExtResource("1_nxp2d")
 Speed = 400
 SpawnLocation = 1
@@ -14,4 +14,4 @@ SpawnInterval = 1.0
 [resource]
 script = ExtResource("3_jtn0i")
 TimeLimit = 30
-Enemies = Array[Object]([SubResource("Resource_8jqcf")])
+Enemies = Array[Object]([SubResource("Resource_oabn0")])

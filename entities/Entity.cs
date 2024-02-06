@@ -1,8 +1,8 @@
 using Godot;
 
-namespace Platypus.Entity
+namespace Platypus.Entities
 {
-    public partial class Enemy : Area2D
+    public partial class Entity : Area2D
     {
         public int Speed { get; set; }
         private Vector2 _direction = Vector2.Left;

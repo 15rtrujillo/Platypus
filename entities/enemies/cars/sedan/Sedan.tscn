@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cnbtff6yl5wki"]
 
-[ext_resource type="PackedScene" uid="uid://dossc0fvpq5ga" path="res://entity/enemy/Car.tscn" id="1_ab3em"]
-[ext_resource type="Texture2D" uid="uid://bvt0d6vssjxyn" path="res://entity/enemy/sedan.png" id="2_ou2bi"]
+[ext_resource type="PackedScene" uid="uid://dossc0fvpq5ga" path="res://entities/enemies/cars/Car.tscn" id="1_ab3em"]
+[ext_resource type="Texture2D" uid="uid://bvt0d6vssjxyn" path="res://entities/enemies/cars/sedan/sedan.png" id="2_ou2bi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ousaf"]
 size = Vector2(81, 44)

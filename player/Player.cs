@@ -1,6 +1,7 @@
 using Godot;
+using Platypus.Entities.Enemies;
 
-namespace Platypus.Entity
+namespace Platypus.PlayerNS
 {
 	public partial class Player : Area2D
 	{

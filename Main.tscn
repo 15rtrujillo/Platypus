@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bcn3oftm4kjan"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_3rkei"]
-[ext_resource type="PackedScene" uid="uid://dwgrfqrudo6hg" path="res://entity/player/Player.tscn" id="2_78jx3"]
+[ext_resource type="PackedScene" uid="uid://dwgrfqrudo6hg" path="res://player/Player.tscn" id="2_78jx3"]
 [ext_resource type="Resource" uid="uid://c24sprvy7xhm2" path="res://levels/Level1.tres" id="2_j8jbk"]
 [ext_resource type="PackedScene" uid="uid://daqvac56oklni" path="res://Playfield.tscn" id="2_yqcs8"]
 [ext_resource type="PackedScene" uid="uid://c8hi2f8gw6rkg" path="res://ui/MessageBox.tscn" id="6_0yrjk"]

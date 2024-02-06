@@ -9,6 +9,6 @@ namespace Platypus.Levels
 		public int TimeLimit { get; set; }
 
 		[Export]
-		public Godot.Collections.Array<EnemyData> Enemies { get; set; }
+		public Godot.Collections.Array<EntityData> Enemies { get; set; }
 	}
 }

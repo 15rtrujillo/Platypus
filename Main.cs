@@ -1,6 +1,8 @@
 using Godot;
-using Platypus.Entity;
+using Platypus.Entities;
+using Platypus.Entities.Enemies;
 using Platypus.Levels;
+using Platypus.PlayerNS;
 using Platypus.UserInterface;
 using System;
 using System.Collections.Generic;
@@ -90,19 +92,19 @@ namespace Platypus
 
 		private void SetupEnemyTimers()
 		{
-			foreach (EnemyData enemyData in _level.Enemies)
+			foreach (EntityData enemyData in _level.Enemies)
 			{
-				EnemyData thisEnemyData = enemyData;
+				EntityData thisEnemyData = enemyData;
 
 				Timer timer = new()
 				{
-					Name = thisEnemyData.GetEnemyName() + "SpawnTimer",
+					Name = thisEnemyData.GetEntityName() + "SpawnTimer",
 					WaitTime = thisEnemyData.SpawnInterval
 				};
 
 				void timerAction()
 				{
-					Enemy enemy = thisEnemyData.Scene.Instantiate<Car>();
+					Entity enemy = thisEnemyData.Scene.Instantiate<Entity>();
 					InitializeEnemy(enemy, thisEnemyData);
 				}
 
@@ -115,7 +117,7 @@ namespace Platypus
 			}
 		}
 
-		private void InitializeEnemy(Enemy enemy, EnemyData enemyData)
+		private void InitializeEnemy(Entity enemy, EntityData enemyData)
 		{
 			AddChild(enemy);
 			enemy.Speed = enemyData.Speed;

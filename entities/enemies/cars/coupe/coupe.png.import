@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di87loor2g3ku"
-path="res://.godot/imported/semi.png-9532350225f0ba5b244222850a40ef80.ctex"
+uid="uid://by0wyobvhwieb"
+path="res://.godot/imported/coupe.png-91326a95806eef1146e1c92a40d84bc5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entity/enemy/semi.png"
-dest_files=["res://.godot/imported/semi.png-9532350225f0ba5b244222850a40ef80.ctex"]
+source_file="res://entities/enemies/cars/coupe/coupe.png"
+dest_files=["res://.godot/imported/coupe.png-91326a95806eef1146e1c92a40d84bc5.ctex"]
 
 [params]
 

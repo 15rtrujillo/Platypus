@@ -1,10 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://dossc0fvpq5ga"]
 
-[ext_resource type="Script" path="res://entity/enemy/Car.cs" id="1_lys4k"]
+[ext_resource type="Script" path="res://entities/enemies/cars/Car.cs" id="1_il3ol"]
 
 [node name="Car" type="Area2D"]
 monitoring = false
-script = ExtResource("1_lys4k")
+script = ExtResource("1_il3ol")
 CarName = "Car"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

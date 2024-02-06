@@ -4,7 +4,7 @@ using System.IO;
 namespace Platypus.Levels
 {
 	[GlobalClass]
-	public partial class EnemyData : Resource
+	public partial class EntityData : Resource
 	{
 		[Export]
 		public PackedScene Scene { get; set; }
@@ -17,7 +17,7 @@ namespace Platypus.Levels
 		[Export]
 		public float SpawnInterval { get; set; }
 
-		public string GetEnemyName()
+		public string GetEntityName()
 		{
 			return Path.GetFileNameWithoutExtension(Scene.ResourcePath);
 		}

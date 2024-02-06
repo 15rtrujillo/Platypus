@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvt0d6vssjxyn"
-path="res://.godot/imported/sedan.png-8465e1ca1c10ab19c96c07af32345bf3.ctex"
+uid="uid://ksw45ai1808u"
+path="res://.godot/imported/platypus.png-7ad81415af59d066e765843b0d97f531.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entity/enemy/sedan.png"
-dest_files=["res://.godot/imported/sedan.png-8465e1ca1c10ab19c96c07af32345bf3.ctex"]
+source_file="res://player/platypus.png"
+dest_files=["res://.godot/imported/platypus.png-7ad81415af59d066e765843b0d97f531.ctex"]
 
 [params]
 
