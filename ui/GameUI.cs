@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 namespace Platypus.UserInterface
@@ -12,7 +11,7 @@ namespace Platypus.UserInterface
 		private readonly Stack<TextureRect> _lives = new Stack<TextureRect>();
 		private ProgressBar _progressBar;
 		private PackedScene _lifeTemplate;
-		
+
 		public override void _Ready()
 		{
 			_oneUpLabel = GetNode<Label>("TopContainer/OneUpLabel");
@@ -29,7 +28,7 @@ namespace Platypus.UserInterface
 				}
 			}
 		}
-		
+
 		public void UpdateProgressBar(float progress)
 		{
 			_progressBar.Value = progress;
