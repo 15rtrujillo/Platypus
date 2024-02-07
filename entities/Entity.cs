@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 namespace Platypus.Entities;
 
@@ -22,13 +23,10 @@ public partial class Entity : Area2D
 		}
 	}
 
-	protected Sprite2D _sprite;
 	private VisibleOnScreenNotifier2D _onScreenNotifier;
 
 	public override void _Ready()
 	{
-		_sprite = GetNode<Sprite2D>("Sprite2D");
-
 		_onScreenNotifier = GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D");
 		_onScreenNotifier.ScreenExited += OnVisibleOnScreenNotifier2DScreenExited;
 	}
@@ -45,7 +43,7 @@ public partial class Entity : Area2D
 
 	protected virtual void Flip()
 	{
-		_sprite.FlipH = true;
+		throw new NotImplementedException("Flip() should be overriden!");
 	}
 
 	private void OnVisibleOnScreenNotifier2DScreenExited()

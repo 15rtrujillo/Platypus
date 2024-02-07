@@ -20,4 +20,17 @@ public partial class Car : Entity
 			_spriteColor = value;
 		}
 	}
+
+	private Sprite2D _sprite;
+
+	public override void _Ready()
+	{
+		_sprite = GetNode<Sprite2D>("Sprite2D");
+		base._Ready();
+	}
+
+	protected override void Flip()
+	{
+		_sprite.FlipH = true;
+	}
 }
