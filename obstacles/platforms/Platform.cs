@@ -1,9 +1,9 @@
 using Godot;
 using System.Collections.Generic;
 
-namespace Platypus.Entities;
+namespace Platypus.Obstacles;
 
-public partial class Platform : Entity
+public partial class Platform : Obstacle
 {
 	private readonly List<Sprite2D> _sprites = new();
 

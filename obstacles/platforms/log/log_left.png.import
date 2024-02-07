@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://by0wyobvhwieb"
-path="res://.godot/imported/coupe.png-91326a95806eef1146e1c92a40d84bc5.ctex"
+uid="uid://cbmnmlbpoovsb"
+path="res://.godot/imported/log_left.png-743acfac599cc1411e2ab9260e82b621.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/enemies/cars/coupe/coupe.png"
-dest_files=["res://.godot/imported/coupe.png-91326a95806eef1146e1c92a40d84bc5.ctex"]
+source_file="res://obstacles/platforms/log/log_left.png"
+dest_files=["res://.godot/imported/log_left.png-743acfac599cc1411e2ab9260e82b621.ctex"]
 
 [params]
 

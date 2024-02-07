@@ -1,6 +1,6 @@
 using Godot;
-using Platypus.Entities;
-using Platypus.Entities.Enemies;
+using Platypus.Obstacles;
+using Platypus.Obstacles.Enemies;
 using Platypus.Levels;
 using Platypus.PlayerNS;
 using Platypus.UserInterface;
@@ -103,7 +103,7 @@ public partial class Main : Node
 
 			void timerAction()
 			{
-				Entity enemy = thisEnemyData.Scene.Instantiate<Entity>();
+				Obstacle enemy = thisEnemyData.Scene.Instantiate<Obstacle>();
 				InitializeEnemy(enemy, thisEnemyData);
 			}
 
@@ -116,7 +116,7 @@ public partial class Main : Node
 		}
 	}
 
-	private void InitializeEnemy(Entity enemy, EntityData enemyData)
+	private void InitializeEnemy(Obstacle enemy, EntityData enemyData)
 	{
 		AddChild(enemy);
 		enemy.Speed = enemyData.Speed;

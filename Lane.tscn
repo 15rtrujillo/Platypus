@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpfpqfpl8euq4"]
+
+[ext_resource type="Script" path="res://Lane.cs" id="1_2demj"]
+
+[node name="Lane" type="Node2D"]
+script = ExtResource("1_2demj")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+offset_left = -525.0
+offset_top = -50.0
+offset_right = 525.0
+offset_bottom = 50.0
+border_width = 5.0
+
+[node name="SpawnPointLeft" type="Marker2D" parent="."]
+position = Vector2(-575, 0)
+
+[node name="SpawnPointRight" type="Marker2D" parent="."]
+position = Vector2(575, 0)
+
+[node name="SpawnTimer" type="Timer" parent="."]

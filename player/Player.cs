@@ -1,5 +1,5 @@
 using Godot;
-using Platypus.Entities.Enemies;
+using Platypus.Obstacles.Enemies;
 
 namespace Platypus.PlayerNS;
 

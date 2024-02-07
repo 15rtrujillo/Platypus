@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fkaukhus250r"
-path="res://.godot/imported/turtle.png-322b9c9ee18d60ca4f77fdefec872a40.ctex"
+uid="uid://di87loor2g3ku"
+path="res://.godot/imported/semi.png-afcebb8d3c3c6d4f118706cd372f8b90.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/platforms/turtle/turtle.png"
-dest_files=["res://.godot/imported/turtle.png-322b9c9ee18d60ca4f77fdefec872a40.ctex"]
+source_file="res://obstacles/enemies/cars/semi/semi.png"
+dest_files=["res://.godot/imported/semi.png-afcebb8d3c3c6d4f118706cd372f8b90.ctex"]
 
 [params]
 

@@ -1,8 +1,8 @@
 using Godot;
 
-namespace Platypus.Entities.Enemies;
+namespace Platypus.Obstacles.Enemies;
 
-public partial class Car : Entity
+public partial class Car : Obstacle
 {
 	[Export]
 	public string CarName { get; set; }

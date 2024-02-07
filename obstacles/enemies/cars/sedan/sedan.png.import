@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b07bar7s5t2hg"
-path="res://.godot/imported/log_right.png-3a64a056c7a0346fa38e02146a551090.ctex"
+uid="uid://bvt0d6vssjxyn"
+path="res://.godot/imported/sedan.png-02f56970cae9ef55efc99ca433526fb8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/platforms/log/log_right.png"
-dest_files=["res://.godot/imported/log_right.png-3a64a056c7a0346fa38e02146a551090.ctex"]
+source_file="res://obstacles/enemies/cars/sedan/sedan.png"
+dest_files=["res://.godot/imported/sedan.png-02f56970cae9ef55efc99ca433526fb8.ctex"]
 
 [params]
 
