@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://by0wyobvhwieb" path="res://entities/enemies/cars/coupe/coupe.png" id="2_nx7qo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eh22m"]
-size = Vector2(80, 43)
+size = Vector2(80, 44)
 
 [node name="Coupe" instance=ExtResource("1_n3s1v")]
 
@@ -13,9 +13,7 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_nx7qo")
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_eh22m")
 
 [node name="VisibleOnScreenNotifier2D" parent="." index="2"]
-position = Vector2(0, 0.5)
-scale = Vector2(4, 2.15)
+rect = Rect2(-40, -22, 80, 44)

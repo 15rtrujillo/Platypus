@@ -3,7 +3,7 @@ using System;
 
 namespace Platypus.Entities;
 
-public partial class Entity : Area2D
+public abstract partial class Entity : Area2D
 {
 	public int Speed { get; set; }
 	private Vector2 _direction = Vector2.Left;
@@ -41,10 +41,7 @@ public partial class Entity : Area2D
 		_onScreenNotifier.ScreenExited -= OnVisibleOnScreenNotifier2DScreenExited;
 	}
 
-	protected virtual void Flip()
-	{
-		throw new NotImplementedException("Flip() should be overriden!");
-	}
+	protected abstract void Flip();
 
 	private void OnVisibleOnScreenNotifier2DScreenExited()
 	{

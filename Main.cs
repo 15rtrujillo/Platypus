@@ -71,12 +71,11 @@ public partial class Main : Node
 	{
 		foreach (Node child in GetNode<Node2D>("Playfield").GetChildren())
 		{
-			if (child is Area2D)
+			if (child is Area2D areaNode)
 			{
-				Area2D areaNode = (Area2D)child;
 
 				// Make sure we don't add duplicate handlers if we're restarting the level
-				if (_nestEventHandlers.Keys.Contains(areaNode)) continue;
+				if (_nestEventHandlers.ContainsKey(areaNode)) continue;
 
 				void nestEnteredHandler(Area2D hitBy)
 				{

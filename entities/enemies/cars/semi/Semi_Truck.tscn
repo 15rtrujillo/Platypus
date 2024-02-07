@@ -17,5 +17,4 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_r5fs1")
 
 [node name="VisibleOnScreenNotifier2D" parent="." index="2"]
-position = Vector2(-0.500003, 0.999999)
-scale = Vector2(8.25, 2.8)
+rect = Rect2(-83, -27, 166, 56)
