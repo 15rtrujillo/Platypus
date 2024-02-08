@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dossc0fvpq5ga"]
 
-[ext_resource type="Script" path="res://entities/enemies/cars/Car.cs" id="1_il3ol"]
+[ext_resource type="Script" path="res://obstacles/enemies/cars/Car.cs" id="1_il3ol"]
 
 [node name="Car" type="Area2D"]
 monitoring = false

@@ -1,5 +1,7 @@
 using Godot;
 using Platypus.Levels;
+using Platypus.Obstacles;
+using Platypus.Obstacles.Enemies;
 using System;
 
 public partial class Lane : Node2D
@@ -42,6 +44,20 @@ public partial class Lane : Node2D
 
     private void OnSpawnTimerTimeout()
     {
+        Obstacle obstacle = _data.Obstacle.Instantiate<Obstacle>();
 
+        AddChild(obstacle);
+
+		obstacle.Speed = _data.Speed;
+        if (_data.SpawnFrom == LaneData.Side.Right)
+        {
+            obstacle.Direction = Vector2.Left;
+            obstacle.GlobalPosition = _rightSpawnLocation.GlobalPosition;
+        }
+
+		if (obstacle is Car car)
+		{
+			car.SpriteColor = new((float)GD.RandRange(0.2, 1.0), (float)GD.RandRange(0.2, 1.0), (float)GD.RandRange(0.2, 1.0));
+		}
     }
 }

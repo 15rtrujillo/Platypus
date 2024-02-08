@@ -1,6 +1,5 @@
 [gd_scene load_steps=6 format=3 uid="uid://cnajjqral7x6v"]
 
-[ext_resource type="PackedScene" uid="uid://wn3mm7cqh37e" path="res://entities/platforms/Platform.tscn" id="1_j0o2a"]
 [ext_resource type="Texture2D" uid="uid://b07bar7s5t2hg" path="res://entities/platforms/log/log_right.png" id="2_cj43n"]
 [ext_resource type="Texture2D" uid="uid://ccrq1i6nv0i0l" path="res://entities/platforms/log/log_middle.png" id="3_3dawg"]
 [ext_resource type="Texture2D" uid="uid://cbmnmlbpoovsb" path="res://entities/platforms/log/log_left.png" id="4_o5gft"]
@@ -8,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjkjv"]
 size = Vector2(550, 100)
 
-[node name="LogThree" instance=ExtResource("1_j0o2a")]
+[node name="LogThree" type="Area2D"]
 
 [node name="Right" type="Sprite2D" parent="." index="0"]
 position = Vector2(220, 0)

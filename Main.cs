@@ -1,12 +1,10 @@
 using Godot;
 using Platypus.Obstacles;
-using Platypus.Obstacles.Enemies;
 using Platypus.Levels;
 using Platypus.PlayerNS;
 using Platypus.UserInterface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Platypus;
 
@@ -118,6 +116,7 @@ public partial class Main : Node
 
 	private void InitializeEnemy(Obstacle enemy, LaneData enemyData)
 	{
+		/*
 		AddChild(enemy);
 		enemy.Speed = enemyData.Speed;
 
@@ -129,6 +128,7 @@ public partial class Main : Node
 		}
 
 		enemy.Position = GetNode<Marker2D>($"SpawnLocation{enemyData.SpawnLocation}").Position;
+		*/
 	}
 
 	private void OnNestEntered(Area2D area, Area2D whichNest)
