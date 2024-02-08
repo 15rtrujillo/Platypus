@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace Platypus.Obstacles;
@@ -27,6 +28,12 @@ public abstract partial class Obstacle : Area2D
 	public override void _Ready()
 	{
 		_onScreenNotifier = GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D");
+
+		if (_onScreenNotifier is null)
+		{
+			throw new NullReferenceException("Obstacles must contain a VisibleOnScreenNotifier2D node of the same name.");
+		}
+
 		_onScreenNotifier.ScreenExited += OnVisibleOnScreenNotifier2DScreenExited;
 	}
 

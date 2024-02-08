@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace Platypus.Obstacles.Enemies;
@@ -16,6 +17,10 @@ public partial class Car : Obstacle
 		}
 		set
 		{
+			if (_sprite is null)
+			{
+				throw new NullReferenceException("Attempting to set car color before car has been added to the tree");
+			}
 			_sprite.Modulate = value;
 			_spriteColor = value;
 		}

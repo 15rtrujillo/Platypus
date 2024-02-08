@@ -91,19 +91,19 @@ public partial class Main : Node
 
 	private void SetupEnemyTimers()
 	{
-		foreach (EntityData enemyData in _level.Enemies)
+		foreach (LaneData enemyData in _level.Enemies)
 		{
-			EntityData thisEnemyData = enemyData;
+			LaneData thisEnemyData = enemyData;
 
 			Timer timer = new()
 			{
-				Name = thisEnemyData.GetEntityName() + "SpawnTimer",
+				Name = thisEnemyData.GetObstacleName() + "SpawnTimer",
 				WaitTime = thisEnemyData.SpawnInterval
 			};
 
 			void timerAction()
 			{
-				Obstacle enemy = thisEnemyData.Scene.Instantiate<Obstacle>();
+				Obstacle enemy = thisEnemyData.Obstacle.Instantiate<Obstacle>();
 				InitializeEnemy(enemy, thisEnemyData);
 			}
 
@@ -116,7 +116,7 @@ public partial class Main : Node
 		}
 	}
 
-	private void InitializeEnemy(Obstacle enemy, EntityData enemyData)
+	private void InitializeEnemy(Obstacle enemy, LaneData enemyData)
 	{
 		AddChild(enemy);
 		enemy.Speed = enemyData.Speed;

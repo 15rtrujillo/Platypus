@@ -12,10 +12,10 @@ offset_right = 525.0
 offset_bottom = 50.0
 border_width = 5.0
 
-[node name="SpawnPointLeft" type="Marker2D" parent="."]
+[node name="SpawnLocationLeft" type="Marker2D" parent="."]
 position = Vector2(-575, 0)
 
-[node name="SpawnPointRight" type="Marker2D" parent="."]
+[node name="SpawnLocationRight" type="Marker2D" parent="."]
 position = Vector2(575, 0)
 
 [node name="SpawnTimer" type="Timer" parent="."]
