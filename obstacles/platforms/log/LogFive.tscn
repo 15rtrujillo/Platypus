@@ -1,35 +1,35 @@
-[gd_scene load_steps=6 format=3 uid="uid://cnajjqral7x6v"]
+[gd_scene load_steps=5 format=3 uid="uid://cnajjqral7x6v"]
 
-[ext_resource type="Texture2D" uid="uid://b07bar7s5t2hg" path="res://entities/platforms/log/log_right.png" id="2_cj43n"]
-[ext_resource type="Texture2D" uid="uid://ccrq1i6nv0i0l" path="res://entities/platforms/log/log_middle.png" id="3_3dawg"]
-[ext_resource type="Texture2D" uid="uid://cbmnmlbpoovsb" path="res://entities/platforms/log/log_left.png" id="4_o5gft"]
+[ext_resource type="Texture2D" uid="uid://b07bar7s5t2hg" path="res://obstacles/platforms/log/log_right.png" id="2_cj43n"]
+[ext_resource type="Texture2D" uid="uid://ccrq1i6nv0i0l" path="res://obstacles/platforms/log/log_middle.png" id="3_3dawg"]
+[ext_resource type="Texture2D" uid="uid://cbmnmlbpoovsb" path="res://obstacles/platforms/log/log_left.png" id="4_o5gft"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pjkjv"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nwtra"]
 size = Vector2(550, 100)
 
 [node name="LogThree" type="Area2D"]
 
-[node name="Right" type="Sprite2D" parent="." index="0"]
+[node name="Right" type="Sprite2D" parent="."]
 position = Vector2(220, 0)
 texture = ExtResource("2_cj43n")
 
-[node name="Middle1" type="Sprite2D" parent="." index="1"]
+[node name="Middle1" type="Sprite2D" parent="."]
 position = Vector2(-110, 0)
 texture = ExtResource("3_3dawg")
 
-[node name="Middle2" type="Sprite2D" parent="." index="2"]
+[node name="Middle2" type="Sprite2D" parent="."]
 texture = ExtResource("3_3dawg")
 
-[node name="Middle3" type="Sprite2D" parent="." index="3"]
+[node name="Middle3" type="Sprite2D" parent="."]
 position = Vector2(110, 0)
 texture = ExtResource("3_3dawg")
 
-[node name="Left" type="Sprite2D" parent="." index="4"]
+[node name="Left" type="Sprite2D" parent="."]
 position = Vector2(-220, 0)
 texture = ExtResource("4_o5gft")
 
-[node name="CollisionShape2D" parent="." index="5"]
-shape = SubResource("RectangleShape2D_pjkjv")
-
-[node name="VisibleOnScreenNotifier2D" parent="." index="6"]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 rect = Rect2(-275, -50, 550, 100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nwtra")
