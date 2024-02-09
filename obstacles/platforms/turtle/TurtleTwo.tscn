@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://ps48no2r8t18"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2kfjs"]
+size = Vector2(220, 100)
+
+[node name="TurtleTwo" type="Area2D"]
+
+[node name="LeftTurtle" type="AnimatedSprite2D" parent="."]
+position = Vector2(-55, 0)
+
+[node name="RightTurtle" type="AnimatedSprite2D" parent="."]
+position = Vector2(55, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2kfjs")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-110, -50, 220, 100)

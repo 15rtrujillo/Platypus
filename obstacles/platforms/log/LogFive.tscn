@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnajjqral7x6v"]
+[gd_scene load_steps=6 format=3 uid="uid://cnajjqral7x6v"]
 
+[ext_resource type="Script" path="res://obstacles/platforms/log/Log.cs" id="1_6mebu"]
 [ext_resource type="Texture2D" uid="uid://b07bar7s5t2hg" path="res://obstacles/platforms/log/log_right.png" id="2_cj43n"]
 [ext_resource type="Texture2D" uid="uid://ccrq1i6nv0i0l" path="res://obstacles/platforms/log/log_middle.png" id="3_3dawg"]
 [ext_resource type="Texture2D" uid="uid://cbmnmlbpoovsb" path="res://obstacles/platforms/log/log_left.png" id="4_o5gft"]
@@ -8,6 +9,7 @@
 size = Vector2(550, 100)
 
 [node name="LogThree" type="Area2D"]
+script = ExtResource("1_6mebu")
 
 [node name="Right" type="Sprite2D" parent="."]
 position = Vector2(220, 0)
