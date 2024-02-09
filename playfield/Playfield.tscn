@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://daqvac56oklni"]
+
+[ext_resource type="Texture2D" uid="uid://dgp62jlxbo6lu" path="res://playfield/field.png" id="1_qei62"]
+[ext_resource type="Script" path="res://playfield/Playfield.cs" id="1_w2pu6"]
+[ext_resource type="PackedScene" uid="uid://bpfpqfpl8euq4" path="res://playfield/Lane.tscn" id="3_0p7k7"]
+[ext_resource type="PackedScene" uid="uid://bwhgkld886bpe" path="res://playfield/Nest.tscn" id="3_p3oh0"]
+
+[node name="Playfield" type="Node2D"]
+script = ExtResource("1_w2pu6")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_qei62")
+
+[node name="Nests" type="Node2D" parent="."]
+
+[node name="Nest1" parent="Nests" instance=ExtResource("3_p3oh0")]
+position = Vector2(85, 160)
+
+[node name="Nest2" parent="Nests" instance=ExtResource("3_p3oh0")]
+position = Vector2(305, 160)
+
+[node name="Nest3" parent="Nests" instance=ExtResource("3_p3oh0")]
+position = Vector2(525, 160)
+
+[node name="Nest4" parent="Nests" instance=ExtResource("3_p3oh0")]
+position = Vector2(745, 160)
+
+[node name="Nest5" parent="Nests" instance=ExtResource("3_p3oh0")]
+position = Vector2(965, 160)
+
+[node name="Lanes" type="Node2D" parent="."]
+
+[node name="Lane1" parent="Lanes" instance=ExtResource("3_0p7k7")]
+position = Vector2(525, 1250)
+
+[node name="Lane2" parent="Lanes" instance=ExtResource("3_0p7k7")]
+position = Vector2(525, 1150)
+
+[node name="Lane3" parent="Lanes" instance=ExtResource("3_0p7k7")]
+position = Vector2(525, 1050)
+
+[node name="Lane4" parent="Lanes" instance=ExtResource("3_0p7k7")]
+position = Vector2(525, 950)
+
+[node name="Lane5" parent="Lanes" instance=ExtResource("3_0p7k7")]
+position = Vector2(525, 850)
+
+[node name="Lane6" parent="Lanes" instance=ExtResource("3_0p7k7")]
+position = Vector2(525, 650)
+
+[node name="Lane7" parent="Lanes" instance=ExtResource("3_0p7k7")]
+position = Vector2(525, 550)
+
+[node name="Lane8" parent="Lanes" instance=ExtResource("3_0p7k7")]
+position = Vector2(525, 450)
+
+[node name="Lane9" parent="Lanes" instance=ExtResource("3_0p7k7")]
+position = Vector2(525, 350)
+
+[node name="Lane10" parent="Lanes" instance=ExtResource("3_0p7k7")]
+position = Vector2(525, 250)

@@ -1,5 +1,5 @@
 using Godot;
-using Platypus.Entities.Enemies;
+using Platypus.Obstacles.Enemies;
 
 namespace Platypus.PlayerNS;
 
@@ -7,15 +7,15 @@ public partial class Player : Area2D
 {
 	[ExportGroup("Playfield Boundary")]
 	[Export]
-	public Vector2 MinBound { get; set; } = new Vector2(25, 125);
+	public Vector2 MinBound { get; private set; } = new Vector2(25, 125);
 	[Export]
-	public Vector2 MaxBound { get; set; } = new Vector2(1025, 1375);
+	public Vector2 MaxBound { get; private set; } = new Vector2(1025, 1375);
 
 	[ExportGroup("Water Boundary")]
 	[Export]
-	public Vector2 MinWaterBound { get; set; } = new Vector2(0, 200);
+	public Vector2 MinWaterBound { get; private set; } = new Vector2(0, 200);
 	[Export]
-	public Vector2 MaxWaterBound { get; set; } = new Vector2(1050, 700);
+	public Vector2 MaxWaterBound { get; private set; } = new Vector2(1050, 700);
 
 	public bool CanMove { get; set; } = false;
 

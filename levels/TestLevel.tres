@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Level" load_steps=7 format=3 uid="uid://1e3lw4snapeo"]
+
+[ext_resource type="Script" path="res://levels/Level.cs" id="1_sdayj"]
+[ext_resource type="PackedScene" uid="uid://c4gj4mpst0bhs" path="res://obstacles/enemies/cars/coupe/Coupe.tscn" id="1_sviww"]
+[ext_resource type="Script" path="res://levels/LaneData.cs" id="2_7k8uo"]
+[ext_resource type="PackedScene" uid="uid://cnajjqral7x6v" path="res://obstacles/platforms/log/LogFive.tscn" id="3_sypu7"]
+
+[sub_resource type="Resource" id="Resource_n3t2p"]
+script = ExtResource("2_7k8uo")
+Obstacle = ExtResource("1_sviww")
+Speed = 400
+SpawnFrom = 0
+SpawnInterval = 1.0
+
+[sub_resource type="Resource" id="Resource_gg5d5"]
+script = ExtResource("2_7k8uo")
+Obstacle = ExtResource("3_sypu7")
+Speed = 100
+SpawnFrom = 1
+SpawnInterval = 8.0
+
+[resource]
+script = ExtResource("1_sdayj")
+TimeLimit = 30
+Lane2 = SubResource("Resource_n3t2p")
+Lane6 = SubResource("Resource_gg5d5")
