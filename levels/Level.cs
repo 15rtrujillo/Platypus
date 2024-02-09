@@ -9,5 +9,5 @@ public partial class Level : Resource
 	public int TimeLimit { get; set; }
 
 	[Export]
-	public Godot.Collections.Array<LaneData> Enemies { get; set; }
+	public Godot.Collections.Array<LaneData> LaneData { get; set; }
 }

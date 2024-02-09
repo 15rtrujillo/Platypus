@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bcn3oftm4kjan"]
+[gd_scene load_steps=6 format=3 uid="uid://bcn3oftm4kjan"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_3rkei"]
 [ext_resource type="PackedScene" uid="uid://dwgrfqrudo6hg" path="res://player/Player.tscn" id="2_78jx3"]
-[ext_resource type="PackedScene" uid="uid://daqvac56oklni" path="res://Playfield.tscn" id="2_yqcs8"]
+[ext_resource type="PackedScene" uid="uid://daqvac56oklni" path="res://playfield/Playfield.tscn" id="2_yqcs8"]
 [ext_resource type="PackedScene" uid="uid://c8hi2f8gw6rkg" path="res://ui/MessageBox.tscn" id="6_0yrjk"]
 [ext_resource type="PackedScene" uid="uid://0g67yoct4vdq" path="res://ui/GameUI.tscn" id="7_jgri3"]
 
@@ -18,21 +18,6 @@ wait_time = 0.5
 
 [node name="PlayerSpawnLocation" type="Marker2D" parent="."]
 position = Vector2(525, 1350)
-
-[node name="SpawnLocation0" type="Marker2D" parent="."]
-position = Vector2(-50, 1250)
-
-[node name="SpawnLocation1" type="Marker2D" parent="."]
-position = Vector2(1075, 1150)
-
-[node name="SpawnLocation2" type="Marker2D" parent="."]
-position = Vector2(1075, 1050)
-
-[node name="SpawnLocation3" type="Marker2D" parent="."]
-position = Vector2(-50, 950)
-
-[node name="SpawnLocation4" type="Marker2D" parent="."]
-position = Vector2(-50, 850)
 
 [node name="MainUI" parent="." instance=ExtResource("7_jgri3")]
 z_index = 1

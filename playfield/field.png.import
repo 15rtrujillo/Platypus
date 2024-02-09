@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dgp62jlxbo6lu"
-path="res://.godot/imported/field.png-0d581facd3ddc865b8ea0da5ee8fd013.ctex"
+path="res://.godot/imported/field.png-e44f87a287a546e00ad08a328ed750ba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://field.png"
-dest_files=["res://.godot/imported/field.png-0d581facd3ddc865b8ea0da5ee8fd013.ctex"]
+source_file="res://playfield/field.png"
+dest_files=["res://.godot/imported/field.png-e44f87a287a546e00ad08a328ed750ba.ctex"]
 
 [params]
 

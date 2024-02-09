@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bpfpqfpl8euq4"]
 
-[ext_resource type="Script" path="res://Lane.cs" id="1_2demj"]
+[ext_resource type="Script" path="res://playfield/Lane.cs" id="1_2demj"]
 
 [node name="Lane" type="Node2D"]
 script = ExtResource("1_2demj")

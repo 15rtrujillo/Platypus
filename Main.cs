@@ -1,7 +1,7 @@
 using Godot;
-using Platypus.Obstacles;
 using Platypus.Levels;
 using Platypus.PlayerNS;
+using Platypus.PlayfieldNS;
 using Platypus.UserInterface;
 using System;
 using System.Collections.Generic;
@@ -14,10 +14,11 @@ public partial class Main : Node
 	[Export]
 	public int CurrentLevel { get; set; } = 0;
 	[Export]
-	public Godot.Collections.Array<Level> Levels { get; set; }
+	public Godot.Collections.Array<Level> Levels { get; private set; } = new();
 
 	private Level _level;
 	private Timer _levelTimer;
+	private Playfield _playfield;
 	private Player _player;
 	private Marker2D _playerSpawn;
 	private GameUI _gameUI;
@@ -27,15 +28,16 @@ public partial class Main : Node
 	private int _totalTicks;
 	private int _currentTick = 0;
 
-	private readonly Dictionary<Area2D, Area2D.AreaEnteredEventHandler> _nestEventHandlers = new();
-	private readonly Dictionary<Timer, Action> _timers = new();
-
 	public override void _Ready()
 	{
-		_level = Levels[CurrentLevel];
-
 		_levelTimer = GetNode<Timer>("LevelTimer");
 		_levelTimer.Timeout += OnLevelTimerTimeout;
+
+		_playfield = GetNode<Playfield>("Playfield");
+		foreach (Nest nest in _playfield.Nests)
+		{
+			nest.PlayerEnteredNest += OnPlayerEnteredNest;
+		}
 
 		_player = GetNode<Player>("Player");
 		_player.PlayerDied += OnPlayerDied;
@@ -51,13 +53,14 @@ public partial class Main : Node
 
 	private async void StartLevel()
 	{
+		_level = Levels[CurrentLevel];
+
 		_player.Position = _playerSpawn.Position;
 		_player.Show();
 
 		_totalTicks = _level.TimeLimit * 2;
 
-		SetupNestEventHandlers();
-		SetupEnemyTimers();
+		_playfield.StartLevel(_level);
 
 		await _messageBox.DisplayMessage("Get ready!");
 
@@ -65,88 +68,9 @@ public partial class Main : Node
 		_levelTimer.Start();
 	}
 
-	private void SetupNestEventHandlers()
+	private void OnPlayerEnteredNest()
 	{
-		foreach (Node child in GetNode<Node2D>("Playfield").GetChildren())
-		{
-			if (child is Area2D areaNode)
-			{
-
-				// Make sure we don't add duplicate handlers if we're restarting the level
-				if (_nestEventHandlers.ContainsKey(areaNode)) continue;
-
-				void nestEnteredHandler(Area2D hitBy)
-				{
-					OnNestEntered(hitBy, areaNode);
-				}
-
-				_nestEventHandlers.Add(areaNode, nestEnteredHandler);
-
-				areaNode.AreaEntered += nestEnteredHandler;
-			}
-		}
-	}
-
-	private void SetupEnemyTimers()
-	{
-		foreach (LaneData enemyData in _level.Enemies)
-		{
-			LaneData thisEnemyData = enemyData;
-
-			Timer timer = new()
-			{
-				Name = thisEnemyData.GetObstacleName() + "SpawnTimer",
-				WaitTime = thisEnemyData.SpawnInterval
-			};
-
-			void timerAction()
-			{
-				Obstacle enemy = thisEnemyData.Obstacle.Instantiate<Obstacle>();
-				InitializeEnemy(enemy, thisEnemyData);
-			}
-
-			timer.Timeout += timerAction;
-
-			AddChild(timer);
-			_timers.Add(timer, timerAction);
-
-			timer.Start();
-		}
-	}
-
-	private void InitializeEnemy(Obstacle enemy, LaneData enemyData)
-	{
-		/*
-		AddChild(enemy);
-		enemy.Speed = enemyData.Speed;
-
-		enemy.Direction = (enemyData.SpawnLocation == 1 || enemyData.SpawnLocation == 2) ? Vector2.Left : Vector2.Right;
-
-		if (enemy is Car car)
-		{
-			car.SpriteColor = new((float)GD.RandRange(0.2, 1.0), (float)GD.RandRange(0.2, 1.0), (float)GD.RandRange(0.2, 1.0));
-		}
-
-		enemy.Position = GetNode<Marker2D>($"SpawnLocation{enemyData.SpawnLocation}").Position;
-		*/
-	}
-
-	private void OnNestEntered(Area2D area, Area2D whichNest)
-	{
-		// Probably increment some score
-
-		if (area is Player player)
-		{
-			player.Position = GetNode<Marker2D>("PlayerSpawnLocation").Position;
-			Sprite2D sprite = new()
-			{
-				Texture = ResourceLoader.Load<Texture2D>("res://entity/platypus.png")
-			};
-			whichNest.AddChild(sprite);
-
-			whichNest.AreaEntered -= _nestEventHandlers[whichNest];
-			_nestEventHandlers.Remove(whichNest);
-		}
+		_player.Position = GetNode<Marker2D>("PlayerSpawnLocation").Position;
 	}
 
 	private async void OnPlayerDied(string how)
@@ -157,13 +81,7 @@ public partial class Main : Node
 		--_lives;
 		_gameUI.RemoveLife();
 
-		foreach ((Timer timer, Action action) in _timers)
-		{
-			timer.Timeout -= action;
-			timer.Stop();
-			_timers.Remove(timer);
-			timer.QueueFree();
-		}
+		_playfield.StopLevel();
 
 		await _messageBox.DisplayMessage($"You {how}!");
 		StartLevel();

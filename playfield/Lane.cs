@@ -4,6 +4,8 @@ using Platypus.Obstacles;
 using Platypus.Obstacles.Enemies;
 using System;
 
+namespace Platypus.PlayfieldNS;
+
 public partial class Lane : Node2D
 {
     private LaneData _data;
@@ -22,6 +24,11 @@ public partial class Lane : Node2D
 
     public void ConfigureLane(LaneData laneData)
     {
+		if (laneData is not null && laneData == _data)
+		{
+			return;
+		}
+
         _data = laneData;
 
         if (_spawnTimer is null)
