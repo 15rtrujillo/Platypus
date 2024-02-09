@@ -7,10 +7,10 @@ namespace Platypus.Levels;
 public partial class LaneData : Resource
 {
 	public enum Side
-    {
-        Right,
-        Left
-    }
+	{
+		Right,
+		Left
+	}
 
 	[Export]
 	public PackedScene Obstacle { get; set; }

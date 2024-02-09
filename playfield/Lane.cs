@@ -8,63 +8,63 @@ namespace Platypus.PlayfieldNS;
 
 public partial class Lane : Node2D
 {
-    private LaneData _data;
-    private Timer _spawnTimer;
-    private Marker2D _leftSpawnLocation;
-    private Marker2D _rightSpawnLocation;
+	private LaneData _data;
+	private Timer _spawnTimer;
+	private Marker2D _leftSpawnLocation;
+	private Marker2D _rightSpawnLocation;
 
 	public override void _Ready()
 	{
 		_spawnTimer = GetNode<Timer>("SpawnTimer");
-        _spawnTimer.Timeout += OnSpawnTimerTimeout;
+		_spawnTimer.Timeout += OnSpawnTimerTimeout;
 
-        _leftSpawnLocation = GetNode<Marker2D>("SpawnLocationLeft");
-        _rightSpawnLocation = GetNode<Marker2D>("SpawnLocationRight");
+		_leftSpawnLocation = GetNode<Marker2D>("SpawnLocationLeft");
+		_rightSpawnLocation = GetNode<Marker2D>("SpawnLocationRight");
 	}
 
-    public void ConfigureLane(LaneData laneData)
-    {
+	public void ConfigureLane(LaneData laneData)
+	{
 		if (laneData is not null && laneData == _data)
 		{
 			return;
 		}
 
-        _data = laneData;
+		_data = laneData;
 
-        if (_spawnTimer is null)
-        {
-            throw new NullReferenceException("Attemmpting to attach data before lane is ready. Make sure to add the Lane to the tree before calling this method.");
-        }
+		if (_spawnTimer is null)
+		{
+			throw new NullReferenceException("Attemmpting to attach data before lane is ready. Make sure to add the Lane to the tree before calling this method.");
+		}
 
-        _spawnTimer.WaitTime = _data.SpawnInterval;
-    }
+		_spawnTimer.WaitTime = _data.SpawnInterval;
+	}
 
-    public void Start()
-    {
-        _spawnTimer.Start();
-    }
+	public void Start()
+	{
+		_spawnTimer.Start();
+	}
 
-    public void Stop()
-    {
-        _spawnTimer.Stop();
-    }
+	public void Stop()
+	{
+		_spawnTimer.Stop();
+	}
 
-    private void OnSpawnTimerTimeout()
-    {
-        Obstacle obstacle = _data.Obstacle.Instantiate<Obstacle>();
+	private void OnSpawnTimerTimeout()
+	{
+		Obstacle obstacle = _data.Obstacle.Instantiate<Obstacle>();
 
-        AddChild(obstacle);
+		AddChild(obstacle);
 
 		obstacle.Speed = _data.Speed;
-        if (_data.SpawnFrom == LaneData.Side.Right)
-        {
-            obstacle.Direction = Vector2.Left;
-            obstacle.GlobalPosition = _rightSpawnLocation.GlobalPosition;
-        }
+		if (_data.SpawnFrom == LaneData.Side.Right)
+		{
+			obstacle.Direction = Vector2.Left;
+			obstacle.GlobalPosition = _rightSpawnLocation.GlobalPosition;
+		}
 
 		if (obstacle is Car car)
 		{
 			car.SpriteColor = new((float)GD.RandRange(0.2, 1.0), (float)GD.RandRange(0.2, 1.0), (float)GD.RandRange(0.2, 1.0));
 		}
-    }
+	}
 }

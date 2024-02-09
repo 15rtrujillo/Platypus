@@ -3,8 +3,6 @@ using Platypus.Levels;
 using Platypus.PlayerNS;
 using Platypus.PlayfieldNS;
 using Platypus.UserInterface;
-using System;
-using System.Collections.Generic;
 
 namespace Platypus;
 
