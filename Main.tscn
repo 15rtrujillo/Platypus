@@ -1,13 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://bcn3oftm4kjan"]
+[gd_scene load_steps=7 format=3 uid="uid://bcn3oftm4kjan"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_3rkei"]
 [ext_resource type="PackedScene" uid="uid://dwgrfqrudo6hg" path="res://player/Player.tscn" id="2_78jx3"]
+[ext_resource type="Resource" uid="uid://1e3lw4snapeo" path="res://levels/TestLevel.tres" id="2_ql3lu"]
 [ext_resource type="PackedScene" uid="uid://daqvac56oklni" path="res://playfield/Playfield.tscn" id="2_yqcs8"]
 [ext_resource type="PackedScene" uid="uid://c8hi2f8gw6rkg" path="res://ui/MessageBox.tscn" id="6_0yrjk"]
 [ext_resource type="PackedScene" uid="uid://0g67yoct4vdq" path="res://ui/GameUI.tscn" id="7_jgri3"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_3rkei")
+Levels = [ExtResource("2_ql3lu")]
 
 [node name="LevelTimer" type="Timer" parent="."]
 wait_time = 0.5

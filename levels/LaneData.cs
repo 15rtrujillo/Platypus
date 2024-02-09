@@ -13,15 +13,15 @@ public partial class LaneData : Resource
 	}
 
 	[Export]
-	public PackedScene Obstacle { get; set; }
+	public PackedScene Obstacle { get; private set; }
 	[Export]
-	public int Speed { get; set; }
+	public int Speed { get; private set; }
 
 	[ExportGroup("Spawning")]
 	[Export]
-	public Side SpawnFrom { get; set; }
+	public Side SpawnFrom { get; private set; }
 	[Export]
-	public float SpawnInterval { get; set; }
+	public float SpawnInterval { get; private set; }
 
 	public string GetObstacleName()
 	{

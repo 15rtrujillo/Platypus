@@ -30,6 +30,7 @@ public partial class Nest : Area2D
 		{
 			_occupied = true;
 			_sprite.Show();
+			PlayerEnteredNest?.Invoke();
 		}
 	}
 }

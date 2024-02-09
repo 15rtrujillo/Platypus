@@ -24,7 +24,7 @@ public partial class Lane : Node2D
 
 	public void ConfigureLane(LaneData laneData)
 	{
-		if (laneData is not null && laneData == _data)
+		if (laneData is null || laneData == _data)
 		{
 			return;
 		}
@@ -41,6 +41,11 @@ public partial class Lane : Node2D
 
 	public void Start()
 	{
+		if (_data is null)
+		{
+			return;
+		}
+
 		_spawnTimer.Start();
 	}
 

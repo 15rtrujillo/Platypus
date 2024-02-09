@@ -6,7 +6,7 @@ namespace Platypus.Obstacles.Enemies;
 public partial class Car : Obstacle
 {
 	[Export]
-	public string CarName { get; set; }
+	public string CarName { get; private set; }
 
 	private Color _spriteColor = new(Colors.White);
 	public Color SpriteColor

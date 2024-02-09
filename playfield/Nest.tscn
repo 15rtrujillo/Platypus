@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gqfs3"]
 size = Vector2(110, 72)
 
-[node name="Nest1" type="Area2D"]
+[node name="Nest" type="Area2D"]
 monitorable = false
 script = ExtResource("1_x1wrf")
 
