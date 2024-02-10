@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://ps48no2r8t18"]
+[gd_scene load_steps=3 format=3 uid="uid://ps48no2r8t18"]
+
+[ext_resource type="SpriteFrames" uid="uid://bnygb8q2ek6k4" path="res://obstacles/platforms/turtle/TurtleFrames.tres" id="1_ixidb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2kfjs"]
 size = Vector2(220, 100)
@@ -7,12 +9,16 @@ size = Vector2(220, 100)
 
 [node name="LeftTurtle" type="AnimatedSprite2D" parent="."]
 position = Vector2(-55, 0)
+sprite_frames = ExtResource("1_ixidb")
 
 [node name="RightTurtle" type="AnimatedSprite2D" parent="."]
 position = Vector2(55, 0)
+sprite_frames = ExtResource("1_ixidb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_2kfjs")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
 rect = Rect2(-110, -50, 220, 100)

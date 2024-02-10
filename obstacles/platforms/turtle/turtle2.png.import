@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0nyhk6y1cyoc"
-path="res://.godot/imported/turtle_basically_submerged.png-2d7bb862e71f14a3c68f11e4904b377c.ctex"
+uid="uid://cj50ldkw6vqom"
+path="res://.godot/imported/turtle2.png-177ce9bb1aea07c9fa2c21f269590b39.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://obstacles/platforms/turtle/turtle_basically_submerged.png"
-dest_files=["res://.godot/imported/turtle_basically_submerged.png-2d7bb862e71f14a3c68f11e4904b377c.ctex"]
+source_file="res://obstacles/platforms/turtle/turtle2.png"
+dest_files=["res://.godot/imported/turtle2.png-177ce9bb1aea07c9fa2c21f269590b39.ctex"]
 
 [params]
 
