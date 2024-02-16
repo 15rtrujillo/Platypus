@@ -43,9 +43,9 @@ public partial class Turtle : Obstacle
 
 	private async void Sink()
 	{
+		await Task.Delay(GD.RandRange(0, SinkMillisecondsDelay));
 		while (_running)
 		{
-			await Task.Delay(SinkMillisecondsDelay);
 			foreach (AnimatedSprite2D sprite in _sprites)
 			{
 				sprite?.Play("default", Speed / 100.0f);
@@ -54,11 +54,14 @@ public partial class Turtle : Obstacle
 			_player?.LeftPlatform();
 
 			await Task.Delay(SinkMillisecondsDelay);
+			Monitoring = true;
+
 			foreach (AnimatedSprite2D sprite in _sprites)
 			{
 				sprite?.Play("default", -1 * (Speed / 100.0f), true);
 			}
-			Monitoring = true;
+
+			await Task.Delay(SinkMillisecondsDelay);
 		}
 	}
 

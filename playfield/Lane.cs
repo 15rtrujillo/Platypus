@@ -64,7 +64,13 @@ public partial class Lane : Node2D
 		if (_data.SpawnFrom == LaneData.Side.Right)
 		{
 			obstacle.Direction = Vector2.Left;
-			obstacle.GlobalPosition = _rightSpawnLocation.GlobalPosition;
+			obstacle.Position = _rightSpawnLocation.Position;
+		}
+
+		else
+		{
+			obstacle.Direction = Vector2.Right;
+			obstacle.Position = _leftSpawnLocation.Position;
 		}
 
 		if (obstacle is Car car)
