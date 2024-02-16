@@ -18,9 +18,7 @@ position = Vector2(55, 0)
 sprite_frames = ExtResource("1_ixidb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_2kfjs")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-visible = false
 rect = Rect2(-110, -50, 220, 100)

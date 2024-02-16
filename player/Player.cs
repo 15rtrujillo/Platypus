@@ -1,4 +1,5 @@
 using Godot;
+using Platypus.Obstacles;
 using Platypus.Obstacles.Enemies;
 
 namespace Platypus.PlayerNS;
@@ -24,6 +25,8 @@ public partial class Player : Area2D
 
 	private Sprite2D _sprite;
 	private Vector2 _newPosition;
+	private Area2D _platform;
+	private bool _isOnPlatform = false;
 	private bool _isMoving = false;
 
 	public override void _Ready()
@@ -117,6 +120,18 @@ public partial class Player : Area2D
 	private void Die(string how)
 	{
 		PlayerDied?.Invoke(how);
+	}
+
+	public void LandedOnPlatform(Area2D  paltform)
+	{
+		_isOnPlatform = true;
+		_platform = paltform;
+	}
+
+	public void LeftPlatform()
+	{
+		_isOnPlatform = false;
+		_platform = null;
 	}
 
 	private void OnAreaEntered(Area2D area)
