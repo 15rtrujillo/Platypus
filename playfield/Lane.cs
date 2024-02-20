@@ -3,6 +3,7 @@ using Platypus.Levels;
 using Platypus.Obstacles;
 using Platypus.Obstacles.Enemies;
 using System;
+using System.Collections.Generic;
 
 namespace Platypus.PlayfieldNS;
 
@@ -12,6 +13,7 @@ public partial class Lane : Node2D
 	private Timer _spawnTimer;
 	private Marker2D _leftSpawnLocation;
 	private Marker2D _rightSpawnLocation;
+	private List<Obstacle> _obstacles = new();
 
 	public override void _Ready()
 	{
@@ -46,25 +48,44 @@ public partial class Lane : Node2D
 			return;
 		}
 
+		// Spawn an obstacle
+		OnSpawnTimerTimeout();
+
 		_spawnTimer.Start();
 	}
 
 	public void Stop()
 	{
 		_spawnTimer.Stop();
+		foreach (Obstacle obstacle in _obstacles)
+		{
+			obstacle?.QueueFree();
+		}
+
+		_obstacles.Clear();
 	}
 
 	private void OnSpawnTimerTimeout()
 	{
 		Obstacle obstacle = _data.Obstacle.Instantiate<Obstacle>();
 
+		_obstacles.Add(obstacle);
 		AddChild(obstacle);
 
 		obstacle.Speed = _data.Speed;
+
+		CollisionShape2D collider = obstacle.GetNode<CollisionShape2D>("CollisionShape2D");
+		float width = ((RectangleShape2D)collider.Shape).Size.X;
 		if (_data.SpawnFrom == LaneData.Side.Right)
 		{
 			obstacle.Direction = Vector2.Left;
-			obstacle.GlobalPosition = _rightSpawnLocation.GlobalPosition;
+			obstacle.Position = _rightSpawnLocation.Position + Vector2.Right * (width / 2);
+		}
+
+		else
+		{
+			obstacle.Direction = Vector2.Right;
+			obstacle.Position = _leftSpawnLocation.Position + Vector2.Left * (width / 2);
 		}
 
 		if (obstacle is Car car)

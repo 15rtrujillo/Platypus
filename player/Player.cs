@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using Godot;
 using Platypus.Obstacles.Enemies;
+using Platypus.Obstacles.Platforms;
 
 namespace Platypus.PlayerNS;
 
@@ -24,6 +26,7 @@ public partial class Player : Area2D
 
 	private Sprite2D _sprite;
 	private Vector2 _newPosition;
+	private List<Platform> _platforms = new();
 	private bool _isMoving = false;
 
 	public override void _Ready()
@@ -76,22 +79,16 @@ public partial class Player : Area2D
 	public override void _PhysicsProcess(double delta)
 	{
 		// Check for drowning
-		if (_isMoving && IsInWater(_newPosition))
+		bool isOnPlatform = _platforms.Count > 0;
+		if (IsInWater(Position) && !isOnPlatform)
 		{
-			RayCast2D rayCast = GetNode<RayCast2D>("RayCast2D");
-			rayCast.Enabled = true;
-			rayCast.ForceRaycastUpdate();
-			if (rayCast.IsColliding())
-			{
-				GD.Print("Hit something!" + ((Node)rayCast.GetCollider()).Name);
-			}
+			Die("drowned");
+		}
 
-			else
-			{
-				GD.Print("You drowned!");
-				// Die();
-			}
-			rayCast.Enabled = false;
+		if (_platforms.Count > 0)
+		{
+			Platform platform = _platforms[0];
+			Position += platform.Speed * platform.Direction * (float)delta;
 		}
 
 		if (_isMoving && IsInPlayfield(_newPosition))
@@ -117,6 +114,16 @@ public partial class Player : Area2D
 	private void Die(string how)
 	{
 		PlayerDied?.Invoke(how);
+	}
+
+	public void LandedOnPlatform(Platform paltform)
+	{
+		_platforms.Add(paltform);
+	}
+
+	public void LeftPlatform(Platform platform)
+	{
+		_platforms.Remove(platform);
 	}
 
 	private void OnAreaEntered(Area2D area)

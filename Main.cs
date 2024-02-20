@@ -56,6 +56,7 @@ public partial class Main : Node
 		_player.Position = _playerSpawn.Position;
 		_player.Show();
 
+		_currentTick = 0;
 		_totalTicks = _level.TimeLimit * 2;
 
 		_playfield.StartLevel(_level);
@@ -73,6 +74,7 @@ public partial class Main : Node
 
 	private async void OnPlayerDied(string how)
 	{
+		_levelTimer.Stop();
 		_player.Hide();
 		_player.CanMove = false;
 		_player.Position = _playerSpawn.Position;

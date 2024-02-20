@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fkaukhus250r"
-path="res://.godot/imported/turtle.png-2f7fe3181c1e93a92cc6ca9f747e9267.ctex"
+uid="uid://c4frwcetv7eho"
+path="res://.godot/imported/turtle4.png-74422ceef7ecf6255f52031bf627f9bb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://obstacles/platforms/turtle/turtle.png"
-dest_files=["res://.godot/imported/turtle.png-2f7fe3181c1e93a92cc6ca9f747e9267.ctex"]
+source_file="res://obstacles/platforms/turtle/turtle4.png"
+dest_files=["res://.godot/imported/turtle4.png-74422ceef7ecf6255f52031bf627f9bb.ctex"]
 
 [params]
 
