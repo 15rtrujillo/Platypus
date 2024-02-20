@@ -54,10 +54,14 @@ public partial class Turtle : Platform
 			{
 				sprite?.Play("default", Speed / 100.0f);
 			}
+			foreach (AnimatedSprite2D sprite in _sprites)
+			{
+				await ToSignal(sprite, AnimatedSprite2D.SignalName.AnimationFinished);
+			}
 			Monitoring = false;
-			_player?.LeftPlatform();
+			_player?.LeftPlatform(this);
 
-			await Task.Delay(SinkMillisecondsDelay);
+			await Task.Delay(1000);
 
 			if (!_running)
 			{
@@ -65,10 +69,13 @@ public partial class Turtle : Platform
 			}
 
 			Monitoring = true;
-
 			foreach (AnimatedSprite2D sprite in _sprites)
 			{
 				sprite?.Play("default", -1 * (Speed / 100.0f), true);
+			}
+			foreach (AnimatedSprite2D sprite in _sprites)
+			{
+				await ToSignal(sprite, AnimatedSprite2D.SignalName.AnimationFinished);
 			}
 
 			await Task.Delay(SinkMillisecondsDelay);

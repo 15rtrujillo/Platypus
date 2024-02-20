@@ -3,7 +3,7 @@ using Platypus.Levels;
 using Platypus.Obstacles;
 using Platypus.Obstacles.Enemies;
 using System;
-using System.Drawing;
+using System.Collections.Generic;
 
 namespace Platypus.PlayfieldNS;
 
@@ -13,6 +13,7 @@ public partial class Lane : Node2D
 	private Timer _spawnTimer;
 	private Marker2D _leftSpawnLocation;
 	private Marker2D _rightSpawnLocation;
+	private List<Obstacle> _obstacles = new();
 
 	public override void _Ready()
 	{
@@ -49,19 +50,26 @@ public partial class Lane : Node2D
 
 		// Spawn an obstacle
 		OnSpawnTimerTimeout();
-		
+
 		_spawnTimer.Start();
 	}
 
 	public void Stop()
 	{
 		_spawnTimer.Stop();
+		foreach (Obstacle obstacle in _obstacles)
+		{
+			obstacle?.QueueFree();
+		}
+
+		_obstacles.Clear();
 	}
 
 	private void OnSpawnTimerTimeout()
 	{
 		Obstacle obstacle = _data.Obstacle.Instantiate<Obstacle>();
 
+		_obstacles.Add(obstacle);
 		AddChild(obstacle);
 
 		obstacle.Speed = _data.Speed;

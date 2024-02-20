@@ -18,7 +18,7 @@ public abstract partial class Platform : Obstacle
 	public override void _ExitTree()
 	{
 		base._ExitTree();
-        
+
         AreaEntered -= OnAreaEntered;
         AreaExited -= OnAreaExited;
 	}
@@ -36,7 +36,7 @@ public abstract partial class Platform : Obstacle
 	{
 		if (area is Player player)
 		{
-			player.LeftPlatform();
+			player.LeftPlatform(this);
 			_player = null;
 		}
 	}
