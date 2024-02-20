@@ -1,6 +1,6 @@
-namespace Platypus.Obstacles;
+namespace Platypus.Obstacles.Platforms;
 
-public partial class Log : Obstacle
+public partial class Log : Platform
 {
 	protected override void Flip()
 	{

@@ -1,19 +1,22 @@
 using Godot;
-using Platypus.PlayerNS;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Platypus.Obstacles;
+namespace Platypus.Obstacles.Platforms;
 
-public partial class Turtle : Obstacle
+public partial class Turtle : Platform
 {
+	[Export]
+	public bool ShouldSink { get; set; } = true;
 	public int SinkMillisecondsDelay { get; set; } = 4000;
 	private bool _running = true;
 	private readonly List<AnimatedSprite2D> _sprites = new();
-	private Player _player;
+	
 
 	public override void _Ready()
 	{
+		base._Ready();
+
 		foreach (Node node in GetChildren())
 		{
 			if (node is AnimatedSprite2D sprite)
@@ -22,14 +25,15 @@ public partial class Turtle : Obstacle
 			}
 		}
 
-		AreaEntered += OnAreaEntered;
-		AreaExited += OnAreaExited;
-
-		Sink();
+		if (ShouldSink)
+		{
+			Sink();
+		}
 	}
 
 	public override void _ExitTree()
 	{
+		base._ExitTree();
 		_running = false;
 	}
 
@@ -54,6 +58,12 @@ public partial class Turtle : Obstacle
 			_player?.LeftPlatform();
 
 			await Task.Delay(SinkMillisecondsDelay);
+
+			if (!_running)
+			{
+				break;
+			}
+
 			Monitoring = true;
 
 			foreach (AnimatedSprite2D sprite in _sprites)
@@ -62,24 +72,6 @@ public partial class Turtle : Obstacle
 			}
 
 			await Task.Delay(SinkMillisecondsDelay);
-		}
-	}
-
-	private void OnAreaEntered(Area2D area)
-	{
-		if (area is Player player)
-		{
-			_player = player;
-			_player.LandedOnPlatform(this);
-		}
-	}
-
-	private void OnAreaExited(Area2D area)
-	{
-		if (area is Player player)
-		{
-			player.LeftPlatform();
-			_player = null;
 		}
 	}
 }
