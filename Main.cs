@@ -22,6 +22,7 @@ public partial class Main : Node
 	private GameUI _gameUI;
 	private MessageBox _messageBox;
 	private int _score = 0;
+	private int _occupiedNests = 0;
 	private int _lives = 4;
 	private int _totalTicks;
 	private int _currentTick = 0;
@@ -67,21 +68,48 @@ public partial class Main : Node
 		_levelTimer.Start();
 	}
 
+	private void StopLevel()
+	{
+		_levelTimer.Stop();
+
+		_player.Hide();
+		_player.CanMove = false;
+		_player.Position = _playerSpawn.Position;
+
+		_playfield.StopLevel();
+	}
+
 	private void OnPlayerEnteredNest()
 	{
 		_player.Position = GetNode<Marker2D>("PlayerSpawnLocation").Position;
+		++_occupiedNests;
+
+		// TODO: Update score
+
+		if (_occupiedNests >= 5)
+		{
+			StopLevel();
+			WinLevel();
+		}
+	}
+
+	private void WinLevel()
+	{
+		_occupiedNests = 0;
+		_playfield.ResetLevel();
+		++CurrentLevel;
+
+		// TODO: Update score based on remaining time
+
+		StartLevel();
 	}
 
 	private async void OnPlayerDied(string how)
 	{
-		_levelTimer.Stop();
-		_player.Hide();
-		_player.CanMove = false;
-		_player.Position = _playerSpawn.Position;
+		StopLevel();
+
 		--_lives;
 		_gameUI.RemoveLife();
-
-		_playfield.StopLevel();
 
 		await _messageBox.DisplayMessage($"You {how}!");
 		StartLevel();

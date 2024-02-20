@@ -38,7 +38,10 @@ public partial class Playfield : Node2D
 		{
 			lane.Stop();
 		}
+	}
 
+	public void ResetLevel()
+	{
 		foreach (Nest nest in Nests)
 		{
 			nest.Reset();
