@@ -82,6 +82,10 @@ public partial class Main : Node
 	private void OnPlayerEnteredNest()
 	{
 		_player.Position = GetNode<Marker2D>("PlayerSpawnLocation").Position;
+
+		_currentTick = 0;
+		_gameUI.UpdateProgressBar(1.0f);
+
 		++_occupiedNests;
 
 		// TODO: Update score

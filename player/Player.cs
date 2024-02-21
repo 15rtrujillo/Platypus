@@ -20,11 +20,13 @@ public partial class Player : Area2D
 	public Vector2 MaxWaterBound { get; private set; } = new Vector2(1050, 700);
 
 	public bool CanMove { get; set; } = false;
+	public bool InWater { get; set; } = false;
 
 	public delegate void PlayerDiedEventHandler(string how);
 	public event PlayerDiedEventHandler PlayerDied;
 
 	private Sprite2D _sprite;
+	private VisibleOnScreenNotifier2D _visibleOnScreenNotifier;
 	private Vector2 _newPosition;
 	private List<Platform> _platforms = new();
 	private bool _isMoving = false;
@@ -32,8 +34,10 @@ public partial class Player : Area2D
 	public override void _Ready()
 	{
 		_sprite = GetNode<Sprite2D>("Sprite2D");
+		_visibleOnScreenNotifier = GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D");
 
 		AreaEntered += OnAreaEntered;
+		_visibleOnScreenNotifier.ScreenExited += OnScreenExited;
 	}
 
 	public override void _UnhandledKeyInput(InputEvent @event)
@@ -80,7 +84,7 @@ public partial class Player : Area2D
 	{
 		// Check for drowning
 		bool isOnPlatform = _platforms.Count > 0;
-		if (IsInWater(Position) && !isOnPlatform)
+		if (InWater && !isOnPlatform)
 		{
 			Die("drowned");
 		}
@@ -104,14 +108,7 @@ public partial class Player : Area2D
 				&& position.X < MaxBound.X && position.Y < MaxBound.Y;
 	}
 
-	private bool IsInWater(Vector2 position)
-	{
-		return position.X > MinWaterBound.X && position.Y > MinWaterBound.Y
-				&& position.X < MaxWaterBound.X && position.Y < MaxWaterBound.Y;
-
-	}
-
-	private void Die(string how)
+	public void Die(string how)
 	{
 		PlayerDied?.Invoke(how);
 	}
@@ -132,5 +129,10 @@ public partial class Player : Area2D
 		{
 			Die($"got ran over by a {car.CarName.ToLower()}");
 		}
+	}
+
+	private void OnScreenExited()
+	{
+		Die("died");
 	}
 }

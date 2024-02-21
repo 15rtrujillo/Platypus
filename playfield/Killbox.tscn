@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0f2pibnqaqxi"]
+
+[ext_resource type="Script" path="res://playfield/Killbox.cs" id="1_u6th2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ybo2y"]
+size = Vector2(100, 100)
+
+[node name="Killbox" type="Area2D"]
+position = Vector2(195, 150)
+script = ExtResource("1_u6th2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ybo2y")

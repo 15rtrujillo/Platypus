@@ -1,17 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://daqvac56oklni"]
+[gd_scene load_steps=7 format=3 uid="uid://daqvac56oklni"]
 
 [ext_resource type="Texture2D" uid="uid://dgp62jlxbo6lu" path="res://playfield/field.png" id="1_qei62"]
 [ext_resource type="Script" path="res://playfield/Playfield.cs" id="1_w2pu6"]
 [ext_resource type="PackedScene" uid="uid://bpfpqfpl8euq4" path="res://playfield/Lane.tscn" id="3_0p7k7"]
 [ext_resource type="PackedScene" uid="uid://bwhgkld886bpe" path="res://playfield/Nest.tscn" id="3_p3oh0"]
+[ext_resource type="PackedScene" uid="uid://b0f2pibnqaqxi" path="res://playfield/Killbox.tscn" id="5_8istu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n0pv5"]
+size = Vector2(1050, 500)
 
 [node name="Playfield" type="Node2D"]
 script = ExtResource("1_w2pu6")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="TextureRect" type="Sprite2D" parent="."]
+position = Vector2(525, 750)
 texture = ExtResource("1_qei62")
+
+[node name="Water" type="Area2D" parent="."]
+position = Vector2(525, 450)
+monitorable = false
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Water"]
+shape = SubResource("RectangleShape2D_n0pv5")
 
 [node name="Nests" type="Node2D" parent="."]
 
@@ -61,3 +72,16 @@ position = Vector2(525, 350)
 
 [node name="Lane10" parent="Lanes" instance=ExtResource("3_0p7k7")]
 position = Vector2(525, 250)
+
+[node name="Killboxes" type="Node2D" parent="."]
+
+[node name="Killbox1" parent="Killboxes" instance=ExtResource("5_8istu")]
+
+[node name="Killbox2" parent="Killboxes" instance=ExtResource("5_8istu")]
+position = Vector2(415, 150)
+
+[node name="Killbox3" parent="Killboxes" instance=ExtResource("5_8istu")]
+position = Vector2(635, 150)
+
+[node name="Killbox4" parent="Killboxes" instance=ExtResource("5_8istu")]
+position = Vector2(855, 150)

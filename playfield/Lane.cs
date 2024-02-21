@@ -59,7 +59,10 @@ public partial class Lane : Node2D
 		_spawnTimer.Stop();
 		foreach (Obstacle obstacle in _obstacles)
 		{
-			obstacle?.QueueFree();
+			if (IsInstanceValid(obstacle))
+			{
+				obstacle.QueueFree();
+			}
 		}
 
 		_obstacles.Clear();

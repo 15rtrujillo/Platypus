@@ -9,6 +9,7 @@
 size = Vector2(330, 100)
 
 [node name="LogThree" type="Area2D"]
+monitorable = false
 script = ExtResource("1_a2j40")
 
 [node name="Right" type="Sprite2D" parent="."]

@@ -15,9 +15,7 @@ public partial class LaneData : Resource
 	[Export]
 	public PackedScene Obstacle { get; private set; }
 	[Export]
-	public int Speed { get; private set; }
-
-	[ExportGroup("Spawning")]
+	public int Speed { get; private set; } = 100;
 	[Export]
 	public Side SpawnFrom { get; private set; }
 	[Export]

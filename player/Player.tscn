@@ -3,9 +3,8 @@
 [ext_resource type="Script" path="res://player/Player.cs" id="1_7ub02"]
 [ext_resource type="Texture2D" uid="uid://ksw45ai1808u" path="res://player/platypus.png" id="1_x7d8f"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4vprq"]
-radius = 19.0
-height = 92.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r3h4v"]
+size = Vector2(44, 90)
 
 [node name="Player" type="Area2D"]
 script = ExtResource("1_7ub02")
@@ -15,12 +14,7 @@ metadata/_edit_group_ = true
 texture = ExtResource("1_x7d8f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_4vprq")
+shape = SubResource("RectangleShape2D_r3h4v")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(0, -50)
-enabled = false
-target_position = Vector2(0, -50)
-hit_from_inside = true
-collide_with_areas = true
-collide_with_bodies = false
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-22, -45, 44, 90)
