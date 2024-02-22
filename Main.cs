@@ -8,6 +8,10 @@ namespace Platypus;
 
 public partial class Main : Node
 {
+	private const int ENTERED_NEST_SCORE = 50;
+	private const int PER_TICK_REMAINING_SCORE = 10;
+	private const int FORWARD_STEP_SCORE = 10;
+
 	[ExportGroup("Levels")]
 	[Export]
 	public int CurrentLevel { get; set; } = 0;
@@ -40,6 +44,7 @@ public partial class Main : Node
 
 		_player = GetNode<Player>("Player");
 		_player.PlayerDied += OnPlayerDied;
+		_player.PlayerMovedForward += OnPlayerMovedForward;
 
 		_playerSpawn = GetNode<Marker2D>("PlayerSpawnLocation");
 
@@ -79,33 +84,40 @@ public partial class Main : Node
 		_playfield.StopLevel();
 	}
 
+	private async void WinLevel()
+	{
+		_occupiedNests = 0;
+		_playfield.ResetLevel();
+		++CurrentLevel;
+
+		IncrementScore((_totalTicks - _currentTick) * PER_TICK_REMAINING_SCORE);
+
+		await _messageBox.DisplayMessage("You got them all home!");
+		StartLevel();
+	}
+
+	private void IncrementScore(int howMuch)
+	{
+		_score += howMuch;
+		_gameUI.UpdateScore(_score);
+	}
+
 	private void OnPlayerEnteredNest()
 	{
-		_player.Position = GetNode<Marker2D>("PlayerSpawnLocation").Position;
+		_player.Position = _playerSpawn.Position;
 
 		_currentTick = 0;
 		_gameUI.UpdateProgressBar(1.0f);
 
 		++_occupiedNests;
 
-		// TODO: Update score
+		IncrementScore(ENTERED_NEST_SCORE);
 
 		if (_occupiedNests >= 5)
 		{
 			StopLevel();
 			WinLevel();
 		}
-	}
-
-	private void WinLevel()
-	{
-		_occupiedNests = 0;
-		_playfield.ResetLevel();
-		++CurrentLevel;
-
-		// TODO: Update score based on remaining time
-
-		StartLevel();
 	}
 
 	private async void OnPlayerDied(string how)
@@ -117,6 +129,11 @@ public partial class Main : Node
 
 		await _messageBox.DisplayMessage($"You {how}!");
 		StartLevel();
+	}
+
+	private void OnPlayerMovedForward()
+	{
+		IncrementScore(FORWARD_STEP_SCORE);
 	}
 
 	private void OnLevelTimerTimeout()

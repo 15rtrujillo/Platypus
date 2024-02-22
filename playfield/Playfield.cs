@@ -16,6 +16,7 @@ public partial class Playfield : Node2D
 	{
 		_water = GetNode<Area2D>("Water");
 		_water.AreaEntered += OnWaterEntered;
+		_water.AreaExited += OnWaterExited;
 
 		foreach (Nest nest in GetNode<Node2D>("Nests").GetChildren().Cast<Nest>())
 		{

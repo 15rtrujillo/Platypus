@@ -47,4 +47,9 @@ public partial class GameUI : Control
 		TextureRect life = _lives.Pop();
 		life.QueueFree();
 	}
+
+	public void UpdateScore(int newScore)
+	{
+		_scoreLabel.Text = $"Score\n{newScore}";
+	}
 }
