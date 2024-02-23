@@ -33,7 +33,7 @@ public partial class Playfield : Node2D
 	{
 		for (int i = 0; i < Lanes.Count; ++i)
 		{
-			Lanes[i].ConfigureLane(level[i]);
+			Lanes[i].ConfigureLane(level.GetLaneData(i));
 			Lanes[i].Start();
 		}
 	}

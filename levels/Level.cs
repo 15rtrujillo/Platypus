@@ -1,4 +1,5 @@
 using Godot;
+using Platypus.PlayfieldNS;
 using System;
 
 namespace Platypus.Levels;
@@ -30,19 +31,21 @@ public partial class Level : Resource
 	[Export]
 	public LaneData Lane10 { get; private set; }
 
-	public LaneData this[int index]
+	public LaneData GetLaneData(int index)
 	{
-		get
+		return index switch
 		{
-			try
-			{
-				return (LaneData)GetType().GetProperty($"Lane{index + 1}").GetValue(this, null);
-			}
-
-			catch (ArgumentException)
-			{
-				return null;
-			}
-		}
+			1 => Lane1,
+			2 => Lane2,
+			3 => Lane3,
+			4 => Lane4,
+			5 => Lane5,
+			6 => Lane6,
+			7 => Lane7,
+			8 => Lane8,
+			9 => Lane9,
+			10 => Lane10,
+			_ => null,
+		};
 	}
 }
