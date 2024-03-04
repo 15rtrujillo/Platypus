@@ -7,6 +7,7 @@
 size = Vector2(80, 44)
 
 [node name="Coupe" instance=ExtResource("1_n3s1v")]
+CarName = "Coupe"
 
 [node name="Sprite2D" parent="." index="0"]
 scale = Vector2(1.5, 1.5)

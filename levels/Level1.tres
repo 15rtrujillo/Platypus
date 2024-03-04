@@ -1,0 +1,68 @@
+[gd_resource type="Resource" script_class="Level" load_steps=14 format=3 uid="uid://dfiincsy0bpk1"]
+
+[ext_resource type="Script" path="res://levels/Level.cs" id="1_alrgj"]
+[ext_resource type="PackedScene" uid="uid://cnajjqral7x6v" path="res://obstacles/platforms/log/LogFive.tscn" id="1_aods0"]
+[ext_resource type="Script" path="res://levels/LaneData.cs" id="2_ddlu1"]
+[ext_resource type="PackedScene" uid="uid://c4gj4mpst0bhs" path="res://obstacles/enemies/cars/coupe/Coupe.tscn" id="3_0xrqo"]
+[ext_resource type="PackedScene" uid="uid://cnbtff6yl5wki" path="res://obstacles/enemies/cars/sedan/Sedan.tscn" id="4_gcofl"]
+[ext_resource type="PackedScene" uid="uid://wsjchmotxgtt" path="res://obstacles/platforms/log/LogThree.tscn" id="5_us14d"]
+
+[sub_resource type="Resource" id="Resource_qdl0r"]
+script = ExtResource("2_ddlu1")
+Obstacle = ExtResource("1_aods0")
+Speed = 100
+SpawnFrom = 0
+SpawnInterval = 8.0
+
+[sub_resource type="Resource" id="Resource_r3vo1"]
+script = ExtResource("2_ddlu1")
+Obstacle = ExtResource("3_0xrqo")
+Speed = 200
+SpawnFrom = 0
+SpawnInterval = 3.0
+
+[sub_resource type="Resource" id="Resource_4xnh5"]
+script = ExtResource("2_ddlu1")
+Obstacle = ExtResource("4_gcofl")
+Speed = 175
+SpawnFrom = 1
+SpawnInterval = 4.0
+
+[sub_resource type="Resource" id="Resource_rwylo"]
+script = ExtResource("2_ddlu1")
+Obstacle = ExtResource("1_aods0")
+Speed = 105
+SpawnFrom = 0
+SpawnInterval = 8.5
+
+[sub_resource type="Resource" id="Resource_h3naj"]
+script = ExtResource("2_ddlu1")
+Obstacle = ExtResource("5_us14d")
+Speed = 102
+SpawnFrom = 1
+SpawnInterval = 9.0
+
+[sub_resource type="Resource" id="Resource_6e6vy"]
+script = ExtResource("2_ddlu1")
+Obstacle = ExtResource("1_aods0")
+Speed = 125
+SpawnFrom = 0
+SpawnInterval = 7.0
+
+[sub_resource type="Resource" id="Resource_adal6"]
+script = ExtResource("2_ddlu1")
+Obstacle = ExtResource("5_us14d")
+Speed = 103
+SpawnFrom = 1
+SpawnInterval = 6.0
+
+[resource]
+script = ExtResource("1_alrgj")
+TimeLimit = 30
+Lane2 = SubResource("Resource_r3vo1")
+Lane4 = SubResource("Resource_4xnh5")
+Lane6 = SubResource("Resource_rwylo")
+Lane7 = SubResource("Resource_h3naj")
+Lane8 = SubResource("Resource_6e6vy")
+Lane9 = SubResource("Resource_adal6")
+Lane10 = SubResource("Resource_qdl0r")

@@ -44,12 +44,22 @@ public partial class GameUI : Control
 
 	public void RemoveLife()
 	{
+		if (_lives.Count == 0)
+		{
+			return;
+		}
+
 		TextureRect life = _lives.Pop();
 		life.QueueFree();
 	}
 
 	public void UpdateScore(int newScore)
 	{
-		_scoreLabel.Text = $"Score\n{newScore}";
+		_scoreLabel.Text = $"SCORE\n{newScore}";
+	}
+
+	public void UpdateOneUpLabel(int oneUp)
+	{
+		_oneUpLabel.Text = $"1-UP\n{oneUp}";
 	}
 }

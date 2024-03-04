@@ -35,16 +35,16 @@ public partial class Level : Resource
 	{
 		return index switch
 		{
-			1 => Lane1,
-			2 => Lane2,
-			3 => Lane3,
-			4 => Lane4,
-			5 => Lane5,
-			6 => Lane6,
-			7 => Lane7,
-			8 => Lane8,
-			9 => Lane9,
-			10 => Lane10,
+			0 => Lane1,
+			1 => Lane2,
+			2 => Lane3,
+			3 => Lane4,
+			4 => Lane5,
+			5 => Lane6,
+			6 => Lane7,
+			7 => Lane8,
+			8 => Lane9,
+			9 => Lane10,
 			_ => null,
 		};
 	}
